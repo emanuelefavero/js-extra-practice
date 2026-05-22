@@ -72,6 +72,7 @@ Nella pagina puoi:
 - vedere l'output con test passati o falliti;
 - aprire i suggerimenti con il toggle "Mostra suggerimenti";
 - aprire ogni soluzione con il toggle "Mostra soluzione e spiegazione";
+- usare automaticamente tema chiaro o scuro in base alle preferenze del sistema;
 - salvare automaticamente il codice e il completamento nel browser.
 
 ## Stato locale

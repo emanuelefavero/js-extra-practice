@@ -64,6 +64,8 @@ For very simple exercises, a short paragraph is enough.
 - Completion state saved in `localStorage`.
 - Student code saved per exercise in `localStorage`.
 - Green completed badges in the sidebar.
+- Light/dark mode follows the user's system preference through
+  `prefers-color-scheme`, including the CodeMirror editor theme.
 - Final success message after all exercises are completed:
   `Tutti gli esercizi completati. Ecco un’arancina! 🍘`
 - Development-only helper buttons, visible only with `npm run dev` through
@@ -155,9 +157,10 @@ the current exercise data.
 
 The visual style should remain modern, minimal, and documentation-like:
 
-- light theme only;
-- cool gray backgrounds;
-- white surfaces;
+- light theme should stay unchanged unless explicitly requested;
+- dark theme should follow `prefers-color-scheme` and use modern GitHub-like
+  dark surfaces;
+- cool gray backgrounds and white surfaces in light mode;
 - subtle borders;
 - indigo/blue for focus and selection;
 - green only for `Esegui test` and success/completed states;

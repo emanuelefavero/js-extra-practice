@@ -20,33 +20,33 @@ let lastResult = null;
 
 const editorTheme = EditorView.theme({
   '&': {
-    color: '#24292f',
-    backgroundColor: '#ffffff',
+    color: 'var(--cm-text)',
+    backgroundColor: 'var(--cm-bg)',
   },
   '.cm-content': {
-    caretColor: '#4f46e5',
+    caretColor: 'var(--cm-caret)',
     padding: '14px 0',
   },
   '.cm-line': {
     padding: '0 16px',
   },
   '.cm-cursor, .cm-dropCursor': {
-    borderLeftColor: '#4f46e5',
+    borderLeftColor: 'var(--cm-caret)',
   },
   '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': {
-    backgroundColor: '#dbeafe',
+    backgroundColor: 'var(--cm-selection)',
   },
   '.cm-gutters': {
-    backgroundColor: '#f6f8fa',
-    color: '#8c959f',
-    borderRight: '1px solid #d8dee4',
+    backgroundColor: 'var(--cm-gutter-bg)',
+    color: 'var(--cm-gutter-text)',
+    borderRight: '1px solid var(--cm-gutter-border)',
   },
   '.cm-activeLine': {
-    backgroundColor: '#f6f8fa',
+    backgroundColor: 'var(--cm-active-line)',
   },
   '.cm-activeLineGutter': {
-    backgroundColor: '#eef2ff',
-    color: '#4f46e5',
+    backgroundColor: 'var(--cm-active-gutter-bg)',
+    color: 'var(--cm-active-gutter-text)',
   },
   '&.cm-focused': {
     outline: 'none',
@@ -54,23 +54,23 @@ const editorTheme = EditorView.theme({
 });
 
 const editorHighlightStyle = HighlightStyle.define([
-  { tag: tags.keyword, color: '#cf222e' },
-  { tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName], color: '#0550ae' },
-  { tag: [tags.function(tags.variableName), tags.labelName], color: '#8250df' },
-  { tag: [tags.color, tags.constant(tags.name), tags.standard(tags.name)], color: '#0550ae' },
-  { tag: [tags.definition(tags.name), tags.separator], color: '#24292f' },
-  { tag: [tags.typeName, tags.className, tags.number, tags.changed, tags.annotation, tags.modifier, tags.self, tags.namespace], color: '#953800' },
-  { tag: [tags.operator, tags.operatorKeyword], color: '#cf222e' },
-  { tag: [tags.url, tags.escape, tags.regexp, tags.link], color: '#0a3069' },
-  { tag: [tags.meta, tags.comment], color: '#6e7781' },
+  { tag: tags.keyword, color: 'var(--cm-keyword)' },
+  { tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName], color: 'var(--cm-name)' },
+  { tag: [tags.function(tags.variableName), tags.labelName], color: 'var(--cm-function)' },
+  { tag: [tags.color, tags.constant(tags.name), tags.standard(tags.name)], color: 'var(--cm-name)' },
+  { tag: [tags.definition(tags.name), tags.separator], color: 'var(--cm-text)' },
+  { tag: [tags.typeName, tags.className, tags.number, tags.changed, tags.annotation, tags.modifier, tags.self, tags.namespace], color: 'var(--cm-number)' },
+  { tag: [tags.operator, tags.operatorKeyword], color: 'var(--cm-keyword)' },
+  { tag: [tags.url, tags.escape, tags.regexp, tags.link], color: 'var(--cm-string)' },
+  { tag: [tags.meta, tags.comment], color: 'var(--cm-comment)' },
   { tag: tags.strong, fontWeight: '700' },
   { tag: tags.emphasis, fontStyle: 'italic' },
   { tag: tags.strikethrough, textDecoration: 'line-through' },
   { tag: tags.link, textDecoration: 'underline' },
-  { tag: tags.heading, fontWeight: '700', color: '#0550ae' },
-  { tag: [tags.atom, tags.bool, tags.special(tags.variableName)], color: '#0550ae' },
-  { tag: [tags.processingInstruction, tags.string, tags.inserted], color: '#0a3069' },
-  { tag: tags.invalid, color: '#82071e' },
+  { tag: tags.heading, fontWeight: '700', color: 'var(--cm-name)' },
+  { tag: [tags.atom, tags.bool, tags.special(tags.variableName)], color: 'var(--cm-name)' },
+  { tag: [tags.processingInstruction, tags.string, tags.inserted], color: 'var(--cm-string)' },
+  { tag: tags.invalid, color: 'var(--cm-invalid)' },
 ]);
 
 function insertTwoSpaces(view) {
