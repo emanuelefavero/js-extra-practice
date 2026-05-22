@@ -577,6 +577,34 @@ code {
   color: var(--muted);
 }
 
+.explanation p {
+  margin: 0 0 10px;
+}
+
+.explanation p:last-child {
+  margin-bottom: 0;
+}
+
+.explanation ol {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 12px;
+  padding-left: 22px;
+}
+
+.explanation li {
+  padding-left: 2px;
+}
+
+.explanation code {
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+  color: var(--text-strong);
+  font-size: 0.9em;
+}
+
 .empty-state {
   padding: 16px;
   border: 1px dashed var(--line-strong);

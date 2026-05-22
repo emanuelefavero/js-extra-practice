@@ -190,7 +190,7 @@ app.innerHTML = `
 
             <section>
               <h3>Spiegazione</h3>
-              <p id="solution-explanation" class="explanation"></p>
+              <div id="solution-explanation" class="explanation"></div>
             </section>
           </div>
         </details>
@@ -307,6 +307,59 @@ function formatFunctionCall(exercise) {
   const firstTest = exercise.tests[0];
   const args = firstTest.args.map(arg => formatValue(arg)).join(', ');
   return `${exercise.functionName}(${args})`;
+}
+
+function escapeHtml(text) {
+  return text
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function renderInlineCode(text) {
+  return escapeHtml(text).replace(/`([^`]+)`/g, '<code>$1</code>');
+}
+
+function renderExplanation(text) {
+  const lines = text.trim().split('\n');
+  let html = '';
+  let listIsOpen = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    if (!line) {
+      if (listIsOpen) {
+        html += '</ol>';
+        listIsOpen = false;
+      }
+      continue;
+    }
+
+    const listMatch = line.match(/^\d+\.\s(.+)$/);
+
+    if (listMatch) {
+      if (!listIsOpen) {
+        html += '<ol>';
+        listIsOpen = true;
+      }
+      html += `<li>${renderInlineCode(listMatch[1])}</li>`;
+      continue;
+    }
+
+    if (listIsOpen) {
+      html += '</ol>';
+      listIsOpen = false;
+    }
+
+    html += `<p>${renderInlineCode(line)}</p>`;
+  }
+
+  if (listIsOpen) html += '</ol>';
+
+  return html;
 }
 
 function runExerciseTests(exercise, code) {
@@ -463,7 +516,7 @@ function loadSelectedExercise() {
   exerciseTitle.textContent = exercise.title;
   exercisePrompt.textContent = exercise.prompt;
   setSolutionCode(exercise.solution);
-  solutionExplanation.textContent = exercise.explanation;
+  solutionExplanation.innerHTML = renderExplanation(exercise.explanation);
   exampleInput.textContent = formatFunctionCall(exercise);
   exampleOutput.textContent = formatValue(exercise.tests[0].expected);
   solutionPanel.open = false;
