@@ -140,6 +140,16 @@ app.innerHTML = `
               <button id="reset-button" class="button secondary" type="button">Reset esercizio</button>
             </div>
             <div id="editor" class="editor-shell"></div>
+            <div class="example-card" aria-label="Esempio input output">
+              <div>
+                <span>Input</span>
+                <code id="example-input"></code>
+              </div>
+              <div>
+                <span>Output atteso</span>
+                <code id="example-output"></code>
+              </div>
+            </div>
           </section>
 
           <section class="output-section">
@@ -192,8 +202,11 @@ const exerciseTitle = document.getElementById('exercise-title');
 const exercisePrompt = document.getElementById('exercise-prompt');
 const editorElement = document.getElementById('editor');
 const outputElement = document.getElementById('output');
+const exampleInput = document.getElementById('example-input');
+const exampleOutput = document.getElementById('example-output');
 const runButton = document.getElementById('run-button');
 const resetButton = document.getElementById('reset-button');
+const solutionPanel = document.querySelector('.solution-panel');
 const solutionCode = document.getElementById('solution-code');
 const solutionExplanation = document.getElementById('solution-explanation');
 
@@ -264,7 +277,17 @@ function deepEqual(value, expected) {
 }
 
 function formatValue(value) {
+  if (Array.isArray(value)) {
+    return `[${value.map(item => formatValue(item)).join(', ')}]`;
+  }
+
   return JSON.stringify(value);
+}
+
+function formatFunctionCall(exercise) {
+  const firstTest = exercise.tests[0];
+  const args = firstTest.args.map(arg => formatValue(arg)).join(', ');
+  return `${exercise.functionName}(${args})`;
 }
 
 function runExerciseTests(exercise, code) {
@@ -347,7 +370,7 @@ function renderExerciseList() {
             <strong>${index + 1}. ${exercise.title}</strong>
             <small>${exercise.level}</small>
           </span>
-          <span class="nav-status">${completed ? 'Completato' : 'Da fare'}</span>
+          <span class="nav-status ${completed ? 'completed' : ''}">${completed ? 'Completato' : 'Da fare'}</span>
         </button>
       `;
     })
@@ -412,6 +435,9 @@ function loadSelectedExercise() {
   exercisePrompt.textContent = exercise.prompt;
   solutionCode.textContent = exercise.solution;
   solutionExplanation.textContent = exercise.explanation;
+  exampleInput.textContent = formatFunctionCall(exercise);
+  exampleOutput.textContent = formatValue(exercise.tests[0].expected);
+  solutionPanel.open = false;
   exerciseStatus.textContent = isCompleted(exercise.id) ? 'Completato' : 'Da fare';
   exerciseStatus.className = `status-pill ${isCompleted(exercise.id) ? 'completed' : ''}`;
 
