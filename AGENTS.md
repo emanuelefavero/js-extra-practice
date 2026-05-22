@@ -57,8 +57,10 @@ For very simple exercises, a short paragraph is enough.
 - Example input and expected output shown below the editor.
 - `Esegui test` button that runs exercise tests in the browser.
 - Output panel showing passing/failing test cases.
+- Hint toggle hidden by default, with beginner-friendly `Suggerimenti` above
+  the solution/explanation toggle.
 - Solution/explanation toggle hidden by default.
-- The solution toggle resets to hidden when switching exercise.
+- The hint and solution toggles reset to hidden when switching exercise.
 - Completion state saved in `localStorage`.
 - Student code saved per exercise in `localStorage`.
 - Green completed badges in the sidebar.
@@ -126,10 +128,15 @@ Each exercise in `src/exercises.js` should include:
 - `starterCode`
 - `solution`
 - `explanation`
+- `hints`
 - `tests`
 
 Keep solutions beginner-friendly. Prefer functions, conditions, loops, arrays,
 strings, and clear variable names. Avoid clever one-liners when a straightforward solution is easier to understand.
+
+Hints should be beginner-friendly, written in Italian, and should help students
+reason through the exercise without revealing the full solution. Prefer one or
+two short hints per exercise.
 
 Tests should be simple and readable. Use neutral example names in test data.
 Avoid personal names connected to real teachers/classmates. Current examples use names like `Anna`, `Paolo`, `Silvia`, `Giulia`, `Bruno`, `Bianca`, `Sofia`,

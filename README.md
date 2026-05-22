@@ -70,6 +70,7 @@ Nella pagina puoi:
 - scrivere il codice nell'editor;
 - eseguire i test con `Esegui test`;
 - vedere l'output con test passati o falliti;
+- aprire i suggerimenti con il toggle "Mostra suggerimenti";
 - aprire ogni soluzione con il toggle "Mostra soluzione e spiegazione";
 - salvare automaticamente il codice e il completamento nel browser.
 

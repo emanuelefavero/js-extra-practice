@@ -180,6 +180,14 @@ app.innerHTML = `
           </section>
         </div>
 
+        <details class="hints-panel">
+          <summary>Mostra suggerimenti</summary>
+          <div class="hints-content">
+            <h3>Suggerimenti</h3>
+            <ol id="exercise-hints" class="hints-list"></ol>
+          </div>
+        </details>
+
         <details class="solution-panel">
           <summary>Mostra soluzione e spiegazione</summary>
           <div class="solution-content">
@@ -226,6 +234,8 @@ const exampleInput = document.getElementById('example-input');
 const exampleOutput = document.getElementById('example-output');
 const runButton = document.getElementById('run-button');
 const resetButton = document.getElementById('reset-button');
+const hintsPanel = document.querySelector('.hints-panel');
+const exerciseHints = document.getElementById('exercise-hints');
 const solutionPanel = document.querySelector('.solution-panel');
 const solutionExplanation = document.getElementById('solution-explanation');
 
@@ -360,6 +370,10 @@ function renderExplanation(text) {
   if (listIsOpen) html += '</ol>';
 
   return html;
+}
+
+function renderHints(hints) {
+  return hints.map(hint => `<li>${renderInlineCode(hint)}</li>`).join('');
 }
 
 function runExerciseTests(exercise, code) {
@@ -516,9 +530,11 @@ function loadSelectedExercise() {
   exerciseTitle.textContent = exercise.title;
   exercisePrompt.textContent = exercise.prompt;
   setSolutionCode(exercise.solution);
+  exerciseHints.innerHTML = renderHints(exercise.hints);
   solutionExplanation.innerHTML = renderExplanation(exercise.explanation);
   exampleInput.textContent = formatFunctionCall(exercise);
   exampleOutput.textContent = formatValue(exercise.tests[0].expected);
+  hintsPanel.open = false;
   solutionPanel.open = false;
   exerciseStatus.textContent = isCompleted(exercise.id) ? 'Completato' : 'Da fare';
   exerciseStatus.className = `status-pill ${isCompleted(exercise.id) ? 'completed' : ''}`;

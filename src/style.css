@@ -549,9 +549,14 @@ button:focus-visible {
   background: var(--danger-soft);
 }
 
+.hints-panel,
 .solution-panel {
   border-top: 1px solid var(--line);
   background: var(--surface-subtle);
+}
+
+.hints-panel {
+  background: var(--surface);
 }
 
 summary {
@@ -562,6 +567,7 @@ summary {
   font-weight: 700;
 }
 
+.hints-content,
 .solution-content {
   display: grid;
   gap: 16px;
@@ -575,6 +581,18 @@ code {
 .explanation {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.hints-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+  color: var(--muted);
+}
+
+.hints-list li {
+  padding-left: 2px;
 }
 
 .explanation p {
@@ -596,6 +614,7 @@ code {
   padding-left: 2px;
 }
 
+.hints-list code,
 .explanation code {
   padding: 1px 5px;
   border: 1px solid var(--line);
@@ -663,6 +682,7 @@ code {
   .work-grid,
   .exercise-main,
   summary,
+  .hints-content,
   .solution-content {
     padding-left: 16px;
     padding-right: 16px;
