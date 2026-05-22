@@ -91,21 +91,18 @@ export const exercises = [
 
 };`,
     solution: `const countVowels = str => {
-  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  const vowels = 'aeiou';
   let count = 0;
 
   for (let i = 0; i < str.length; i++) {
     const letter = str[i].toLowerCase();
-
-    for (let j = 0; j < vowels.length; j++) {
-      if (letter === vowels[j]) count++;
-    }
+    if (vowels.includes(letter)) count++;
   }
 
   return count;
 };`,
     explanation:
-      'Prepariamo un array con le vocali e un contatore. Per ogni carattere della stringa controlliamo se corrisponde a una vocale e, se si, aumentiamo il contatore.',
+      'Prepariamo una stringa con tutte le vocali e un contatore. Per ogni carattere della stringa usiamo includes per controllare se e una vocale; se lo e, aumentiamo il contatore.',
     tests: [
       { args: ['ciao'], expected: 3, message: "'ciao' contiene 3 vocali" },
       { args: ['JS'], expected: 0, message: "'JS' non contiene vocali" },
