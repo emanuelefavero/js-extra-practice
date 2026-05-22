@@ -75,3 +75,16 @@ Non c'e autenticazione e non c'e sincronizzazione tra dispositivi.
 - CodeMirror 6 fornisce editor e syntax highlighting.
 - Le soluzioni usano funzioni, `if`, cicli `for`, array e controlli semplici,
   coerenti con il punto attuale del corso.
+
+## License
+
+- [MIT](LICENSE.md)
+
+
+&nbsp;
+
+---
+
+&nbsp;
+
+[**Go To Top &nbsp; ⬆️**](#js-extra-practice)
