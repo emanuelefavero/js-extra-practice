@@ -1,0 +1,19 @@
+# MacOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Node modules
+node_modules/
+
+# Vite build
+dist/
+
+# Playwright
+.playwright-mcp/
+.playwright-cli
+output/playwright/
+
+# Agents
+.agents/
