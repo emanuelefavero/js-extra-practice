@@ -477,6 +477,27 @@ code {
   text-align: center;
 }
 
+.site-footer {
+  padding: 24px 16px 36px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin-bottom: 0;
+}
+
+.site-footer a {
+  color: var(--accent-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 960px) {
   .app-layout,
   .work-grid {

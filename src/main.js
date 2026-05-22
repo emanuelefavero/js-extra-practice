@@ -114,6 +114,15 @@ app.innerHTML = `
       </article>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <p>
+      Codice sorgente disponibile su
+      <a href="https://github.com/emanuelefavero/js-extra-practice" target="_blank" rel="noreferrer">
+        GitHub
+      </a>.
+    </p>
+  </footer>
 `;
 
 const levelFilter = document.getElementById('level-filter');
