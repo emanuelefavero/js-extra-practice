@@ -3,6 +3,10 @@
 Raccolta interattiva di esercizi JavaScript nata durante una lezione di un
 corso Web Development, con editor, test, soluzioni e spiegazioni in italiano.
 
+## Website
+
+- [https://emanuelefavero.github.io/js-extra-practice/](https://emanuelefavero.github.io/js-extra-practice/)
+
 ## Obiettivo
 
 Il progetto serve per ripassare JavaScript in modo pratico, partendo da piccoli
