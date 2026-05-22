@@ -80,7 +80,6 @@ Non c'e autenticazione e non c'e sincronizzazione tra dispositivi.
 
 - [MIT](LICENSE.md)
 
-
 &nbsp;
 
 ---
