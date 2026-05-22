@@ -1,13 +1,12 @@
 # JS Extra Practice
 
-Raccolta interattiva di esercizi JavaScript svolti durante la lezione
-**JS Extra** del corso Boolean Web Development Part Time, con editor, test,
-soluzioni e spiegazioni in italiano.
+Raccolta interattiva di esercizi JavaScript nata durante una lezione di un
+corso Web Development, con editor, test, soluzioni e spiegazioni in italiano.
 
 ## Obiettivo
 
-Il progetto serve per ripassare gli esercizi della live practice del 21 maggio
-2026. L'idea e aiutare i compagni a:
+Il progetto serve per ripassare JavaScript in modo pratico, partendo da piccoli
+esercizi su funzioni, condizioni, cicli e array. L'app permette di:
 
 - leggere la traccia e scrivere la soluzione direttamente nel browser;
 - aprire la soluzione quando serve;
@@ -16,10 +15,10 @@ Il progetto serve per ripassare gli esercizi della live practice del 21 maggio
 
 ## Contesto della lezione
 
-Il punto del corso e JavaScript fundamentals: funzioni, condizioni, cicli,
-array e controlli di base. Per questo il progetto usa JavaScript vanilla e
-mantiene le soluzioni semplici, anche se usa Vite e CodeMirror per avere un
-editor comodo nel browser.
+Il contesto di partenza e una fase introduttiva su JavaScript fundamentals:
+funzioni, condizioni, cicli, array e controlli di base. Per questo il progetto
+usa JavaScript vanilla e mantiene le soluzioni semplici, anche se usa Vite e
+CodeMirror per avere un editor comodo nel browser.
 
 Gli esercizi inclusi sono:
 
@@ -74,7 +73,7 @@ Non c'e autenticazione e non c'e sincronizzazione tra dispositivi.
 - Il rendering usa DOM e template string, senza framework.
 - CodeMirror 6 fornisce editor e syntax highlighting.
 - Le soluzioni usano funzioni, `if`, cicli `for`, array e controlli semplici,
-  coerenti con il punto attuale del corso.
+  coerenti con una fase introduttiva di studio di JavaScript.
 
 ## License
 
