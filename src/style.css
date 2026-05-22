@@ -1,20 +1,25 @@
 :root {
-  --bg: #f6f7f4;
+  --bg: #f6f8fa;
   --surface: #ffffff;
-  --surface-muted: #eef3f1;
-  --text: #20242a;
-  --muted: #667069;
-  --line: #d9dfda;
-  --accent: #176b5f;
-  --accent-dark: #0d463e;
-  --snack: #5f5c18;
-  --human: #176b5f;
-  --expert: #8a4b12;
-  --success: #116b3a;
-  --danger: #a33522;
-  --code-bg: #18201d;
-  --code-text: #edf5ee;
-  --shadow: 0 18px 45px rgba(26, 34, 31, 0.08);
+  --surface-subtle: #f8fafc;
+  --surface-muted: #f6f8fa;
+  --text: #24292f;
+  --text-strong: #0f172a;
+  --muted: #57606a;
+  --muted-soft: #8c959f;
+  --line: #d8dee4;
+  --line-strong: #d0d7de;
+  --accent: #4f46e5;
+  --accent-dark: #3730a3;
+  --accent-soft: #eef2ff;
+  --success: #1f883d;
+  --success-dark: #166534;
+  --success-soft: #dafbe1;
+  --danger: #cf222e;
+  --danger-soft: #ffebe9;
+  --code-bg: #f6f8fa;
+  --code-text: #24292f;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px rgba(15, 23, 42, 0.06);
 }
 
 * {
@@ -24,8 +29,12 @@
 body {
   margin: 0;
   color: var(--text);
-  background: var(--bg);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(79, 70, 229, 0.06), transparent 320px),
+    var(--bg);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   line-height: 1.5;
 }
 
@@ -45,8 +54,9 @@ button {
 }
 
 .site-header {
-  background: #dfe9e4;
+  background: rgba(255, 255, 255, 0.82);
   border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(16px);
 }
 
 .header-content {
@@ -54,13 +64,13 @@ button {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 32px;
   align-items: center;
-  padding: 42px 0 32px;
+  padding: 34px 0 28px;
 }
 
 .eyebrow {
   margin: 0 0 8px;
-  color: var(--accent-dark);
-  font-size: 0.82rem;
+  color: var(--accent);
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -75,40 +85,48 @@ p {
 
 h1 {
   margin-bottom: 0;
-  font-size: clamp(2rem, 4vw, 3.6rem);
+  color: var(--text-strong);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
 h2 {
   margin-bottom: 12px;
-  font-size: 1.55rem;
-  line-height: 1.2;
+  color: var(--text-strong);
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 h3 {
   margin-bottom: 0;
-  font-size: 1rem;
+  color: var(--text-strong);
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .intro {
   max-width: 720px;
   margin-bottom: 0;
-  color: #3f4944;
-  font-size: 1.05rem;
+  color: var(--muted);
+  font-size: 1rem;
 }
 
 .summary-box {
   min-width: 180px;
-  padding: 18px;
-  border: 1px solid rgba(23, 107, 95, 0.2);
+  padding: 16px;
+  border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .summary-box strong {
   display: block;
-  color: var(--accent-dark);
-  font-size: 2.2rem;
+  color: var(--text-strong);
+  font-size: 2rem;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -116,7 +134,7 @@ h3 {
   display: block;
   margin-top: 8px;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .app-layout {
@@ -124,7 +142,7 @@ h3 {
   grid-template-columns: 320px minmax(0, 1fr);
   gap: 22px;
   align-items: start;
-  padding: 28px 0 56px;
+  padding: 24px 0 48px;
 }
 
 .exercise-panel,
@@ -154,18 +172,19 @@ h3 {
 .field span,
 .results-info {
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 700;
 }
 
 select,
 input {
   width: 100%;
-  min-height: 42px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
+  min-height: 40px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface);
   color: var(--text);
+  box-shadow: 0 1px 1px rgba(15, 23, 42, 0.02);
 }
 
 select {
@@ -173,15 +192,20 @@ select {
 }
 
 input {
-  padding: 0 14px;
+  padding: 0 13px;
+}
+
+select::placeholder,
+input::placeholder {
+  color: var(--muted-soft);
 }
 
 select:focus,
 input:focus,
 summary:focus-visible,
 button:focus-visible {
-  outline: 3px solid rgba(23, 107, 95, 0.18);
   border-color: var(--accent);
+  outline: 3px solid rgba(79, 70, 229, 0.16);
 }
 
 .results-info {
@@ -191,13 +215,13 @@ button:focus-visible {
 }
 
 .results-info strong {
-  color: var(--text);
+  color: var(--text-strong);
 }
 
 .exercise-list {
   display: grid;
   gap: 8px;
-  max-height: calc(100vh - 260px);
+  max-height: calc(100vh - 252px);
   overflow: auto;
 }
 
@@ -206,17 +230,21 @@ button:focus-visible {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 10px;
   width: 100%;
-  padding: 11px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: #fff;
+  padding: 11px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
   color: var(--text);
   text-align: left;
 }
 
+.exercise-nav-item:hover {
+  background: var(--surface-muted);
+}
+
 .exercise-nav-item.active {
-  border-color: var(--accent);
-  background: #e7f1ed;
+  border-color: #c7d2fe;
+  background: var(--accent-soft);
 }
 
 .exercise-nav-item strong,
@@ -226,7 +254,9 @@ button:focus-visible {
 
 .exercise-nav-item strong {
   overflow-wrap: anywhere;
-  font-size: 0.93rem;
+  color: var(--text-strong);
+  font-size: 0.92rem;
+  font-weight: 650;
   line-height: 1.25;
 }
 
@@ -234,23 +264,27 @@ button:focus-visible {
 .nav-status {
   margin-top: 4px;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .nav-status {
   align-self: start;
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
 }
 
 .success-message {
   margin-bottom: 16px;
-  padding: 14px 16px;
-  border: 1px solid rgba(17, 107, 58, 0.25);
+  padding: 13px 15px;
+  border: 1px solid rgba(31, 136, 61, 0.22);
   border-radius: 8px;
-  background: #e5f5ea;
-  color: var(--success);
-  font-weight: 800;
+  background: var(--success-soft);
+  color: var(--success-dark);
+  font-weight: 700;
 }
 
 .exercise-main {
@@ -260,57 +294,49 @@ button:focus-visible {
 .exercise-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 9px;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 13px;
 }
 
 .badge,
 .status-pill {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
-  padding: 0 10px;
+  min-height: 26px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 800;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
-.badge {
-  color: #fff;
-}
-
-.badge-umano {
-  background: var(--human);
-}
-
-.badge-snack {
-  background: var(--snack);
-}
-
+.badge-snack,
+.badge-umano,
 .badge-esperto {
-  background: var(--expert);
-}
-
-.status-pill {
-  background: #ecefeb;
-  color: var(--muted);
+  border-color: #c7d2fe;
+  background: #f5f7ff;
+  color: var(--accent-dark);
 }
 
 .status-pill.completed {
-  background: #dcf2e3;
-  color: var(--success);
+  border-color: rgba(31, 136, 61, 0.24);
+  background: var(--success-soft);
+  color: var(--success-dark);
 }
 
 .exercise-number {
   color: var(--muted);
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 650;
 }
 
 .prompt {
   margin-bottom: 0;
-  color: #404943;
+  color: var(--muted);
 }
 
 .work-grid {
@@ -337,32 +363,52 @@ button:focus-visible {
   min-height: 38px;
   padding: 0 14px;
   border: 1px solid transparent;
-  border-radius: 6px;
-  font-weight: 800;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
 .button.primary {
-  background: var(--accent);
+  border-color: var(--success);
+  background: var(--success);
   color: #fff;
 }
 
+.button.primary:hover {
+  border-color: var(--success-dark);
+  background: var(--success-dark);
+}
+
 .button.secondary {
-  border-color: var(--line);
-  background: #fff;
-  color: var(--accent-dark);
+  border-color: var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.button.secondary:hover {
+  background: var(--surface-muted);
 }
 
 .editor-shell {
   min-height: 360px;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 8px;
-  background: #fff;
+  background: var(--surface);
+}
+
+.editor-shell:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
 .cm-editor {
   height: 360px;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
 }
 
 .cm-scroller {
@@ -373,9 +419,9 @@ button:focus-visible {
   min-height: 360px;
   padding: 16px;
   overflow: auto;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 8px;
-  background: #fff;
+  background: var(--surface);
 }
 
 .output-box p {
@@ -398,6 +444,7 @@ button:focus-visible {
 
 .output-box li strong {
   color: var(--muted);
+  font-size: 0.78rem;
 }
 
 .output-box li.passed strong {
@@ -420,18 +467,18 @@ button:focus-visible {
 }
 
 .success-output {
-  border-color: rgba(17, 107, 58, 0.25);
-  background: #f1fbf4;
+  border-color: rgba(31, 136, 61, 0.24);
+  background: #f6fef9;
 }
 
 .error-output {
-  border-color: rgba(163, 53, 34, 0.25);
-  background: #fff4f1;
+  border-color: rgba(207, 34, 46, 0.22);
+  background: var(--danger-soft);
 }
 
 .solution-panel {
   border-top: 1px solid var(--line);
-  background: var(--surface-muted);
+  background: var(--surface-subtle);
 }
 
 summary {
@@ -439,7 +486,7 @@ summary {
   padding: 14px 22px;
   color: var(--accent-dark);
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .solution-content {
@@ -452,6 +499,7 @@ pre {
   margin: 0;
   padding: 16px;
   overflow-x: auto;
+  border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--code-bg);
   color: var(--code-text);
@@ -465,14 +513,14 @@ code {
 
 .explanation {
   margin-bottom: 0;
-  color: #37413b;
+  color: var(--muted);
 }
 
 .empty-state {
   padding: 16px;
-  border: 1px dashed var(--line);
+  border: 1px dashed var(--line-strong);
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--surface-muted);
   color: var(--muted);
   text-align: center;
 }
@@ -489,7 +537,7 @@ code {
 }
 
 .site-footer a {
-  color: var(--accent-dark);
+  color: var(--accent);
   font-weight: 700;
   text-decoration: none;
 }
@@ -516,7 +564,7 @@ code {
 @media (max-width: 700px) {
   .header-content {
     grid-template-columns: 1fr;
-    padding: 36px 0 28px;
+    padding: 32px 0 24px;
   }
 
   .summary-box {

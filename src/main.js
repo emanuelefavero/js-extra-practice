@@ -1,8 +1,9 @@
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
-import { bracketMatching, defaultHighlightStyle, syntaxHighlighting } from '@codemirror/language';
+import { bracketMatching, HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 import { EditorState } from '@codemirror/state';
 import { EditorView, keymap, lineNumbers } from '@codemirror/view';
+import { tags } from '@lezer/highlight';
 import './style.css';
 import { exercises } from './exercises.js';
 
@@ -15,14 +16,69 @@ let selectedExerciseId = exercises[0].id;
 let editorView;
 let lastResult = null;
 
+const editorTheme = EditorView.theme({
+  '&': {
+    color: '#24292f',
+    backgroundColor: '#ffffff',
+  },
+  '.cm-content': {
+    caretColor: '#4f46e5',
+    padding: '14px 0',
+  },
+  '.cm-line': {
+    padding: '0 16px',
+  },
+  '.cm-cursor, .cm-dropCursor': {
+    borderLeftColor: '#4f46e5',
+  },
+  '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': {
+    backgroundColor: '#dbeafe',
+  },
+  '.cm-gutters': {
+    backgroundColor: '#f6f8fa',
+    color: '#8c959f',
+    borderRight: '1px solid #d8dee4',
+  },
+  '.cm-activeLine': {
+    backgroundColor: '#f6f8fa',
+  },
+  '.cm-activeLineGutter': {
+    backgroundColor: '#eef2ff',
+    color: '#4f46e5',
+  },
+  '&.cm-focused': {
+    outline: 'none',
+  },
+});
+
+const editorHighlightStyle = HighlightStyle.define([
+  { tag: tags.keyword, color: '#cf222e' },
+  { tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName], color: '#0550ae' },
+  { tag: [tags.function(tags.variableName), tags.labelName], color: '#8250df' },
+  { tag: [tags.color, tags.constant(tags.name), tags.standard(tags.name)], color: '#0550ae' },
+  { tag: [tags.definition(tags.name), tags.separator], color: '#24292f' },
+  { tag: [tags.typeName, tags.className, tags.number, tags.changed, tags.annotation, tags.modifier, tags.self, tags.namespace], color: '#953800' },
+  { tag: [tags.operator, tags.operatorKeyword], color: '#cf222e' },
+  { tag: [tags.url, tags.escape, tags.regexp, tags.link], color: '#0a3069' },
+  { tag: [tags.meta, tags.comment], color: '#6e7781' },
+  { tag: tags.strong, fontWeight: '700' },
+  { tag: tags.emphasis, fontStyle: 'italic' },
+  { tag: tags.strikethrough, textDecoration: 'line-through' },
+  { tag: tags.link, textDecoration: 'underline' },
+  { tag: tags.heading, fontWeight: '700', color: '#0550ae' },
+  { tag: [tags.atom, tags.bool, tags.special(tags.variableName)], color: '#0550ae' },
+  { tag: [tags.processingInstruction, tags.string, tags.inserted], color: '#0a3069' },
+  { tag: tags.invalid, color: '#82071e' },
+]);
+
 app.innerHTML = `
   <header class="site-header">
     <div class="container header-content">
       <div>
-        <p class="eyebrow">Boolean Web Development Part Time</p>
+        <p class="eyebrow">Corso Web Development</p>
         <h1>JS Extra Practice</h1>
         <p class="intro">
-          Allenati sugli esercizi della live practice: scrivi la funzione,
+          Allenati con piccoli esercizi JavaScript: scrivi la funzione,
           esegui i test e apri la soluzione solo quando serve.
         </p>
       </div>
@@ -63,7 +119,7 @@ app.innerHTML = `
 
     <section class="practice-area" aria-live="polite">
       <div id="success-message" class="success-message" hidden>
-        Hai completato tutti gli esercizi. Ottimo lavoro! 🎉
+        Hai completato tutti gli esercizi. Ottimo lavoro.
       </div>
 
       <article class="workspace">
@@ -117,10 +173,7 @@ app.innerHTML = `
 
   <footer class="site-footer">
     <p>
-      Codice sorgente disponibile su
-      <a href="https://github.com/emanuelefavero/js-extra-practice" target="_blank" rel="noreferrer">
-        GitHub
-      </a>.
+      Codice sorgente disponibile su <a href="https://github.com/emanuelefavero/js-extra-practice" target="_blank" rel="noreferrer">GitHub</a>.
     </p>
   </footer>
 `;
@@ -405,7 +458,8 @@ editorView = new EditorView({
     lineNumbers(),
     history(),
     bracketMatching(),
-    syntaxHighlighting(defaultHighlightStyle),
+    editorTheme,
+    syntaxHighlighting(editorHighlightStyle),
     javascript(),
     keymap.of([...defaultKeymap, ...historyKeymap]),
     EditorState.tabSize.of(2),
