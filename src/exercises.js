@@ -109,7 +109,7 @@ export const exercises = [
     tests: [
       { args: ['ciao'], expected: 3, message: "'ciao' contiene 3 vocali" },
       { args: ['JS'], expected: 0, message: "'JS' non contiene vocali" },
-      { args: ['Boolean'], expected: 4, message: "'Boolean' contiene 4 vocali" },
+      { args: ['Esercizi'], expected: 4, message: "'Esercizi' contiene 4 vocali" },
     ],
   },
   {

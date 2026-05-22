@@ -1,6 +1,6 @@
-import { defaultKeymap, history, historyKeymap, indentLess, indentMore } from '@codemirror/commands';
+import { defaultKeymap, history, historyKeymap, indentLess } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
-import { bracketMatching, HighlightStyle, syntaxHighlighting } from '@codemirror/language';
+import { bracketMatching, HighlightStyle, indentUnit, syntaxHighlighting } from '@codemirror/language';
 import { EditorState } from '@codemirror/state';
 import { EditorView, keymap, lineNumbers } from '@codemirror/view';
 import { tags } from '@lezer/highlight';
@@ -71,6 +71,11 @@ const editorHighlightStyle = HighlightStyle.define([
   { tag: [tags.processingInstruction, tags.string, tags.inserted], color: '#0a3069' },
   { tag: tags.invalid, color: '#82071e' },
 ]);
+
+function insertTwoSpaces(view) {
+  view.dispatch(view.state.replaceSelection('  '));
+  return true;
+}
 
 app.innerHTML = `
   <header class="site-header">
@@ -523,12 +528,13 @@ editorView = new EditorView({
     syntaxHighlighting(editorHighlightStyle),
     javascript(),
     keymap.of([
-      { key: 'Tab', run: indentMore },
+      { key: 'Tab', run: insertTwoSpaces },
       { key: 'Shift-Tab', run: indentLess },
       ...defaultKeymap,
       ...historyKeymap,
     ]),
     EditorState.tabSize.of(2),
+    indentUnit.of('  '),
     EditorView.updateListener.of(update => {
       if (update.docChanged) saveCurrentCode();
     }),
