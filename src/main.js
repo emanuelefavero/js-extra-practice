@@ -12,6 +12,7 @@ const codeKey = id => `${STORAGE_PREFIX}:code:${id}`;
 const completedKey = `${STORAGE_PREFIX}:completed`;
 
 const app = document.getElementById('app');
+const isDevelopment = import.meta.env.DEV;
 let selectedExerciseId = exercises[0].id;
 let editorView;
 let lastResult = null;
@@ -119,8 +120,18 @@ app.innerHTML = `
 
     <section class="practice-area" aria-live="polite">
       <div id="success-message" class="success-message" hidden>
-        Hai completato tutti gli esercizi. Ottimo lavoro.
+        Tutti gli esercizi completati. Ecco un’arancina! 🍘
       </div>
+
+      ${
+        isDevelopment
+          ? `<div class="dev-tools" aria-label="Strumenti di sviluppo">
+              <strong>Dev tools</strong>
+              <button id="complete-all-button" class="button secondary" type="button">Completa tutto</button>
+              <button id="reset-state-button" class="button secondary" type="button">Reset stato</button>
+            </div>`
+          : ''
+      }
 
       <article class="workspace">
         <div class="exercise-main">
@@ -195,6 +206,8 @@ const visibleCount = document.getElementById('visible-count');
 const visibleLabel = document.getElementById('visible-label');
 const progressCount = document.getElementById('progress-count');
 const successMessage = document.getElementById('success-message');
+const completeAllButton = document.getElementById('complete-all-button');
+const resetStateButton = document.getElementById('reset-state-button');
 const exerciseLevel = document.getElementById('exercise-level');
 const exerciseNumber = document.getElementById('exercise-number');
 const exerciseStatus = document.getElementById('exercise-status');
@@ -478,6 +491,28 @@ function resetCurrentExercise() {
   exerciseStatus.className = 'status-pill';
 }
 
+function completeAllExercisesForDev() {
+  saveCompletedIds(exercises.map(exercise => exercise.id));
+  renderProgress();
+  renderExerciseList();
+  exerciseStatus.textContent = 'Completato';
+  exerciseStatus.className = 'status-pill completed';
+}
+
+function resetStateForDev() {
+  localStorage.removeItem(completedKey);
+
+  for (let i = 0; i < exercises.length; i++) {
+    localStorage.removeItem(codeKey(exercises[i].id));
+  }
+
+  selectedExerciseId = exercises[0].id;
+  lastResult = null;
+  levelFilter.value = 'all';
+  searchInput.value = '';
+  loadSelectedExercise();
+}
+
 editorView = new EditorView({
   doc: exercises[0].starterCode,
   extensions: [
@@ -519,5 +554,10 @@ searchInput.addEventListener('input', () => {
 
 runButton.addEventListener('click', runCurrentExercise);
 resetButton.addEventListener('click', resetCurrentExercise);
+
+if (isDevelopment) {
+  completeAllButton.addEventListener('click', completeAllExercisesForDev);
+  resetStateButton.addEventListener('click', resetStateForDev);
+}
 
 loadSelectedExercise();
