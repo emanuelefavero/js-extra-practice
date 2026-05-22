@@ -49,6 +49,14 @@ Per creare la build statica:
 npm run build
 ```
 
+## Deploy su GitHub Pages
+
+Il progetto viene pubblicato tramite GitHub Actions. Nelle impostazioni della
+repository, in **Pages**, seleziona **GitHub Actions** come source di deploy.
+
+Ogni push su `main` esegue `npm ci`, `npm run build` e pubblica la cartella
+`dist`.
+
 ## Come usare l'app
 
 Nella pagina puoi:
