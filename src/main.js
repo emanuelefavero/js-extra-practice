@@ -15,6 +15,7 @@ const app = document.getElementById('app');
 const isDevelopment = import.meta.env.DEV;
 let selectedExerciseId = exercises[0].id;
 let editorView;
+let solutionEditorView;
 let lastResult = null;
 
 const editorTheme = EditorView.theme({
@@ -184,7 +185,7 @@ app.innerHTML = `
           <div class="solution-content">
             <section>
               <h3>Soluzione</h3>
-              <pre><code id="solution-code"></code></pre>
+              <div id="solution-editor" class="solution-editor-shell"></div>
             </section>
 
             <section>
@@ -219,13 +220,13 @@ const exerciseStatus = document.getElementById('exercise-status');
 const exerciseTitle = document.getElementById('exercise-title');
 const exercisePrompt = document.getElementById('exercise-prompt');
 const editorElement = document.getElementById('editor');
+const solutionEditorElement = document.getElementById('solution-editor');
 const outputElement = document.getElementById('output');
 const exampleInput = document.getElementById('example-input');
 const exampleOutput = document.getElementById('example-output');
 const runButton = document.getElementById('run-button');
 const resetButton = document.getElementById('reset-button');
 const solutionPanel = document.querySelector('.solution-panel');
-const solutionCode = document.getElementById('solution-code');
 const solutionExplanation = document.getElementById('solution-explanation');
 
 function getCompletedIds() {
@@ -442,6 +443,16 @@ function setEditorCode(code) {
   });
 }
 
+function setSolutionCode(code) {
+  solutionEditorView.dispatch({
+    changes: {
+      from: 0,
+      to: solutionEditorView.state.doc.length,
+      insert: code,
+    },
+  });
+}
+
 function loadSelectedExercise() {
   const exercise = getSelectedExercise();
   const index = exercises.indexOf(exercise) + 1;
@@ -451,7 +462,7 @@ function loadSelectedExercise() {
   exerciseNumber.textContent = `Esercizio ${index} di ${exercises.length}`;
   exerciseTitle.textContent = exercise.title;
   exercisePrompt.textContent = exercise.prompt;
-  solutionCode.textContent = exercise.solution;
+  setSolutionCode(exercise.solution);
   solutionExplanation.textContent = exercise.explanation;
   exampleInput.textContent = formatFunctionCall(exercise);
   exampleOutput.textContent = formatValue(exercise.tests[0].expected);
@@ -540,6 +551,22 @@ editorView = new EditorView({
     }),
   ],
   parent: editorElement,
+});
+
+solutionEditorView = new EditorView({
+  doc: exercises[0].solution,
+  extensions: [
+    lineNumbers(),
+    bracketMatching(),
+    editorTheme,
+    syntaxHighlighting(editorHighlightStyle),
+    javascript(),
+    EditorState.readOnly.of(true),
+    EditorView.editable.of(false),
+    EditorState.tabSize.of(2),
+    indentUnit.of('  '),
+  ],
+  parent: solutionEditorElement,
 });
 
 exerciseList.addEventListener('click', event => {

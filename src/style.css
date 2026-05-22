@@ -418,7 +418,8 @@ button:focus-visible {
   background: var(--surface-muted);
 }
 
-.editor-shell {
+.editor-shell,
+.solution-editor-shell {
   min-height: 360px;
   overflow: hidden;
   border: 1px solid var(--line-strong);
@@ -429,6 +430,10 @@ button:focus-visible {
 .editor-shell:focus-within {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.solution-editor-shell {
+  min-height: 0;
 }
 
 .example-card {
@@ -468,8 +473,19 @@ button:focus-visible {
   font-size: 0.94rem;
 }
 
+.solution-editor-shell .cm-editor {
+  height: auto;
+  min-height: 120px;
+  max-height: 360px;
+}
+
 .cm-scroller {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.solution-editor-shell .cm-scroller {
+  max-height: 360px;
+  overflow: auto;
 }
 
 .output-box {
@@ -550,18 +566,6 @@ summary {
   display: grid;
   gap: 16px;
   padding: 0 22px 22px;
-}
-
-pre {
-  margin: 0;
-  padding: 16px;
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--code-bg);
-  color: var(--code-text);
-  font-size: 0.92rem;
-  line-height: 1.55;
 }
 
 code {
