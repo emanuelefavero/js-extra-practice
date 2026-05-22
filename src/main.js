@@ -1,4 +1,4 @@
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
+import { defaultKeymap, history, historyKeymap, indentLess, indentMore } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
 import { bracketMatching, HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 import { EditorState } from '@codemirror/state';
@@ -522,7 +522,12 @@ editorView = new EditorView({
     editorTheme,
     syntaxHighlighting(editorHighlightStyle),
     javascript(),
-    keymap.of([...defaultKeymap, ...historyKeymap]),
+    keymap.of([
+      { key: 'Tab', run: indentMore },
+      { key: 'Shift-Tab', run: indentLess },
+      ...defaultKeymap,
+      ...historyKeymap,
+    ]),
     EditorState.tabSize.of(2),
     EditorView.updateListener.of(update => {
       if (update.docChanged) saveCurrentCode();
