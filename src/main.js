@@ -227,7 +227,7 @@ app.innerHTML = `
         </p>
       </div>
 
-      <div class="summary-box" aria-label="Progresso esercizi">
+      <div id="summary-box" class="summary-box" aria-label="Progresso esercizi">
         <strong id="progress-count">0 / ${exercises.length}</strong>
         <span>esercizi completati</span>
       </div>
@@ -364,6 +364,7 @@ const exerciseList = document.getElementById('exercise-list');
 const visibleCount = document.getElementById('visible-count');
 const visibleLabel = document.getElementById('visible-label');
 const progressCount = document.getElementById('progress-count');
+const summaryBox = document.getElementById('summary-box');
 const successMessage = document.getElementById('success-message');
 const completeAllButton = document.getElementById('complete-all-button');
 const resetStateButton = document.getElementById('reset-state-button');
@@ -612,8 +613,11 @@ function renderExerciseList() {
 
 function renderProgress() {
   const completedCount = getCompletedIds().length;
+  const allCompleted = completedCount === exercises.length;
+
   progressCount.textContent = `${completedCount} / ${exercises.length}`;
-  successMessage.hidden = completedCount !== exercises.length;
+  summaryBox.classList.toggle('completed', allCompleted);
+  successMessage.hidden = !allCompleted;
 }
 
 function renderOutput(result) {
