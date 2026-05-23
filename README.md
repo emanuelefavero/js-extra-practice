@@ -71,6 +71,7 @@ Nella pagina puoi:
 - usare la chiusura automatica di parentesi, graffe, quadre e virgolette nell'editor;
 - vedere la riga attiva, l'indentazione automatica e le parentesi abbinate evidenziate;
 - attivare o disattivare l'autocompletamento dell'editor;
+- attivare o disattivare una diagnostica semplice per errori di sintassi;
 - eseguire i test con `Esegui test`;
 - vedere l'output con test passati o falliti;
 - aprire i suggerimenti con il toggle "Mostra suggerimenti";

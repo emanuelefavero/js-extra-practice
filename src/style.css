@@ -59,6 +59,9 @@
   --cm-tooltip-selected-text: #0f172a;
   --cm-tooltip-shadow:
     0 8px 24px rgba(15, 23, 42, 0.12), 0 1px 2px rgba(15, 23, 42, 0.08);
+  --cm-diagnostic-bg: #ffffff;
+  --cm-diagnostic-text: #24292f;
+  --cm-diagnostic-border: #d0d7de;
   --control-shadow: 0 1px 1px rgba(15, 23, 42, 0.02);
   --summary-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   --on-solid: #fff;
@@ -128,6 +131,9 @@
     --cm-tooltip-selected-text: #ffffff;
     --cm-tooltip-shadow:
       0 12px 32px rgba(1, 4, 9, 0.5), 0 1px 2px rgba(1, 4, 9, 0.75);
+    --cm-diagnostic-bg: #161b22;
+    --cm-diagnostic-text: #e6edf3;
+    --cm-diagnostic-border: #3d444d;
     --control-shadow: none;
     --summary-shadow: none;
     --on-solid: #ffffff;
@@ -167,7 +173,7 @@ button {
 }
 
 .container {
-  width: min(1240px, calc(100% - 32px));
+  width: min(1320px, calc(100% - 32px));
   margin: 0 auto;
 }
 
@@ -498,15 +504,27 @@ button:focus-visible {
   display: flex;
   gap: 12px;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  min-height: 64px;
   margin-bottom: 10px;
+}
+
+.editor-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.editor-heading h3 {
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .editor-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
-  justify-content: flex-end;
+  align-items: center;
 }
 
 .button {
@@ -516,6 +534,7 @@ button:focus-visible {
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 700;
+  white-space: nowrap;
   transition:
     background-color 120ms ease,
     border-color 120ms ease,
@@ -547,6 +566,10 @@ button:focus-visible {
   border-color: var(--active-border);
   background: var(--accent-soft);
   color: var(--accent-dark);
+}
+
+.editor-actions .button {
+  padding-inline: 10px;
 }
 
 .editor-shell,
@@ -785,9 +808,14 @@ code {
   text-decoration: underline;
 }
 
-@media (max-width: 960px) {
-  .app-layout,
+@media (max-width: 1140px) {
   .work-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .app-layout {
     grid-template-columns: 1fr;
   }
 
@@ -822,9 +850,11 @@ code {
   .section-heading {
     align-items: stretch;
     flex-direction: column;
+    min-height: 0;
   }
 
   .editor-actions {
+    flex-wrap: wrap;
     flex-direction: column;
   }
 

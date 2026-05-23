@@ -1,7 +1,8 @@
 import { defaultKeymap, history, historyKeymap, indentLess } from '@codemirror/commands';
 import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap } from '@codemirror/autocomplete';
 import { javascript } from '@codemirror/lang-javascript';
-import { bracketMatching, HighlightStyle, indentOnInput, indentUnit, syntaxHighlighting } from '@codemirror/language';
+import { bracketMatching, HighlightStyle, indentOnInput, indentUnit, syntaxHighlighting, syntaxTree } from '@codemirror/language';
+import { linter, lintGutter, lintKeymap } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, highlightActiveLine, highlightActiveLineGutter, keymap, lineNumbers } from '@codemirror/view';
 import { tags } from '@lezer/highlight';
@@ -12,6 +13,7 @@ const STORAGE_PREFIX = 'js-extra-practice';
 const codeKey = id => `${STORAGE_PREFIX}:code:${id}`;
 const completedKey = `${STORAGE_PREFIX}:completed`;
 const autocompleteKey = `${STORAGE_PREFIX}:autocomplete`;
+const syntaxDiagnosticsKey = `${STORAGE_PREFIX}:syntax-diagnostics`;
 
 const app = document.getElementById('app');
 const isDevelopment = import.meta.env.DEV;
@@ -20,6 +22,7 @@ let editorView;
 let solutionEditorView;
 let lastResult = null;
 const autocompleteCompartment = new Compartment();
+const syntaxDiagnosticsCompartment = new Compartment();
 
 const editorTheme = EditorView.theme({
   '&': {
@@ -78,6 +81,22 @@ const editorTheme = EditorView.theme({
     backgroundColor: 'var(--cm-tooltip-selected-bg)',
     color: 'var(--cm-tooltip-selected-text)',
   },
+  '.cm-diagnostic': {
+    border: '1px solid var(--cm-diagnostic-border)',
+    borderRadius: '8px',
+    backgroundColor: 'var(--cm-diagnostic-bg)',
+    color: 'var(--cm-diagnostic-text)',
+  },
+  '.cm-diagnostic-error': {
+    borderLeft: '3px solid var(--cm-invalid)',
+  },
+  '.cm-lintRange-error': {
+    backgroundImage:
+      'linear-gradient(45deg, transparent 65%, var(--cm-invalid) 80%, transparent 90%)',
+    backgroundPosition: 'left bottom',
+    backgroundRepeat: 'repeat-x',
+    backgroundSize: '8px 3px',
+  },
   '&.cm-focused': {
     outline: 'none',
   },
@@ -114,6 +133,38 @@ function isAutocompleteEnabled() {
 
 function getAutocompleteExtension() {
   return isAutocompleteEnabled() ? autocompletion() : [];
+}
+
+function isSyntaxDiagnosticsEnabled() {
+  return localStorage.getItem(syntaxDiagnosticsKey) === 'on';
+}
+
+const syntaxErrorLinter = linter(view => {
+  const diagnostics = [];
+  const docLength = view.state.doc.length;
+
+  syntaxTree(view.state)
+    .cursor()
+    .iterate(node => {
+      if (!node.type.isError || diagnostics.length >= 3) return;
+
+      const from = Math.min(node.from, docLength);
+      const to = Math.max(from, Math.min(node.to || from + 1, docLength));
+
+      diagnostics.push({
+        from,
+        to,
+        severity: 'error',
+        message:
+          'Controlla la sintassi: sembra che manchi una parentesi, una graffa, una virgoletta o un separatore.',
+      });
+    });
+
+  return diagnostics;
+});
+
+function getSyntaxDiagnosticsExtension() {
+  return isSyntaxDiagnosticsEnabled() ? [lintGutter(), syntaxErrorLinter] : [];
 }
 
 app.innerHTML = `
@@ -190,13 +241,16 @@ app.innerHTML = `
 
         <div class="work-grid">
           <section class="editor-section">
-            <div class="section-heading">
+            <div class="section-heading editor-heading">
               <h3>Il tuo codice</h3>
               <div class="editor-actions">
                 <button id="autocomplete-toggle" class="button secondary toggle-button" type="button" aria-pressed="true">
-                  Autocomplete on
+                  Autocomplete
                 </button>
-                <button id="reset-button" class="button secondary" type="button">Reset esercizio</button>
+                <button id="syntax-diagnostics-toggle" class="button secondary toggle-button" type="button" aria-pressed="false">
+                  Diagnostica
+                </button>
+                <button id="reset-button" class="button secondary" type="button">Reset</button>
               </div>
             </div>
             <div id="editor" class="editor-shell"></div>
@@ -277,6 +331,7 @@ const exampleInput = document.getElementById('example-input');
 const exampleOutput = document.getElementById('example-output');
 const runButton = document.getElementById('run-button');
 const autocompleteToggle = document.getElementById('autocomplete-toggle');
+const syntaxDiagnosticsToggle = document.getElementById('syntax-diagnostics-toggle');
 const resetButton = document.getElementById('reset-button');
 const hintsPanel = document.querySelector('.hints-panel');
 const exerciseHints = document.getElementById('exercise-hints');
@@ -566,8 +621,8 @@ function setSolutionCode(code) {
 
 function renderAutocompleteToggle() {
   const enabled = isAutocompleteEnabled();
-  autocompleteToggle.textContent = enabled ? 'Autocomplete on' : 'Autocomplete off';
   autocompleteToggle.setAttribute('aria-pressed', String(enabled));
+  autocompleteToggle.title = enabled ? 'Disattiva autocompletamento' : 'Attiva autocompletamento';
 }
 
 function toggleAutocomplete() {
@@ -583,6 +638,27 @@ function toggleAutocomplete() {
     effects: autocompleteCompartment.reconfigure(getAutocompleteExtension()),
   });
   renderAutocompleteToggle();
+}
+
+function renderSyntaxDiagnosticsToggle() {
+  const enabled = isSyntaxDiagnosticsEnabled();
+  syntaxDiagnosticsToggle.setAttribute('aria-pressed', String(enabled));
+  syntaxDiagnosticsToggle.title = enabled ? 'Disattiva diagnostica sintassi' : 'Attiva diagnostica sintassi';
+}
+
+function toggleSyntaxDiagnostics() {
+  const enabled = !isSyntaxDiagnosticsEnabled();
+
+  if (enabled) {
+    localStorage.setItem(syntaxDiagnosticsKey, 'on');
+  } else {
+    localStorage.removeItem(syntaxDiagnosticsKey);
+  }
+
+  editorView.dispatch({
+    effects: syntaxDiagnosticsCompartment.reconfigure(getSyntaxDiagnosticsExtension()),
+  });
+  renderSyntaxDiagnosticsToggle();
 }
 
 function loadSelectedExercise() {
@@ -672,6 +748,7 @@ editorView = new EditorView({
     bracketMatching(),
     closeBrackets(),
     autocompleteCompartment.of(getAutocompleteExtension()),
+    syntaxDiagnosticsCompartment.of(getSyntaxDiagnosticsExtension()),
     highlightActiveLine(),
     highlightActiveLineGutter(),
     editorTheme,
@@ -682,6 +759,7 @@ editorView = new EditorView({
       { key: 'Shift-Tab', run: indentLess },
       ...closeBracketsKeymap,
       ...completionKeymap,
+      ...lintKeymap,
       ...defaultKeymap,
       ...historyKeymap,
     ]),
@@ -733,6 +811,7 @@ searchInput.addEventListener('input', () => {
 
 runButton.addEventListener('click', runCurrentExercise);
 autocompleteToggle.addEventListener('click', toggleAutocomplete);
+syntaxDiagnosticsToggle.addEventListener('click', toggleSyntaxDiagnostics);
 resetButton.addEventListener('click', resetCurrentExercise);
 
 if (isDevelopment) {
@@ -742,3 +821,4 @@ if (isDevelopment) {
 
 loadSelectedExercise();
 renderAutocompleteToggle();
+renderSyntaxDiagnosticsToggle();
