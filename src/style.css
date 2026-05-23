@@ -52,6 +52,13 @@
   --cm-bracket-bg: rgba(79, 70, 229, 0.14);
   --cm-bracket-border: #818cf8;
   --cm-bracket-text: #0f172a;
+  --cm-tooltip-bg: #ffffff;
+  --cm-tooltip-text: #24292f;
+  --cm-tooltip-border: #d0d7de;
+  --cm-tooltip-selected-bg: #eef2ff;
+  --cm-tooltip-selected-text: #0f172a;
+  --cm-tooltip-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.12), 0 1px 2px rgba(15, 23, 42, 0.08);
   --control-shadow: 0 1px 1px rgba(15, 23, 42, 0.02);
   --summary-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   --on-solid: #fff;
@@ -114,6 +121,13 @@
     --cm-bracket-bg: rgba(88, 166, 255, 0.18);
     --cm-bracket-border: #58a6ff;
     --cm-bracket-text: #f0f6fc;
+    --cm-tooltip-bg: #161b22;
+    --cm-tooltip-text: #e6edf3;
+    --cm-tooltip-border: #3d444d;
+    --cm-tooltip-selected-bg: #1f6feb;
+    --cm-tooltip-selected-text: #ffffff;
+    --cm-tooltip-shadow:
+      0 12px 32px rgba(1, 4, 9, 0.5), 0 1px 2px rgba(1, 4, 9, 0.75);
     --control-shadow: none;
     --summary-shadow: none;
     --on-solid: #ffffff;
@@ -488,6 +502,13 @@ button:focus-visible {
   margin-bottom: 10px;
 }
 
+.editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .button {
   min-height: 38px;
   padding: 0 14px;
@@ -520,6 +541,12 @@ button:focus-visible {
 
 .button.secondary:hover {
   background: var(--surface-muted);
+}
+
+.toggle-button[aria-pressed='true'] {
+  border-color: var(--active-border);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
 }
 
 .editor-shell,
@@ -794,6 +821,10 @@ code {
 
   .section-heading {
     align-items: stretch;
+    flex-direction: column;
+  }
+
+  .editor-actions {
     flex-direction: column;
   }
 

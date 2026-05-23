@@ -57,6 +57,8 @@ For very simple exercises, a short paragraph is enough.
   student editor.
 - CodeMirror highlights the active line, auto-indents after structural input,
   and uses visible matching/non-matching bracket styles.
+- CodeMirror autocompletion is off by default, can be toggled on/off in the
+  student editor, and the preference is saved in `localStorage`.
 - Read-only CodeMirror block for official solutions with syntax highlighting.
 - Example input and expected output shown below the editor.
 - `Esegui test` button that runs exercise tests in the browser.

@@ -1,8 +1,8 @@
 import { defaultKeymap, history, historyKeymap, indentLess } from '@codemirror/commands';
-import { closeBrackets, closeBracketsKeymap } from '@codemirror/autocomplete';
+import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap } from '@codemirror/autocomplete';
 import { javascript } from '@codemirror/lang-javascript';
 import { bracketMatching, HighlightStyle, indentOnInput, indentUnit, syntaxHighlighting } from '@codemirror/language';
-import { EditorState } from '@codemirror/state';
+import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, highlightActiveLine, highlightActiveLineGutter, keymap, lineNumbers } from '@codemirror/view';
 import { tags } from '@lezer/highlight';
 import './style.css';
@@ -11,6 +11,7 @@ import { exercises } from './exercises.js';
 const STORAGE_PREFIX = 'js-extra-practice';
 const codeKey = id => `${STORAGE_PREFIX}:code:${id}`;
 const completedKey = `${STORAGE_PREFIX}:completed`;
+const autocompleteKey = `${STORAGE_PREFIX}:autocomplete`;
 
 const app = document.getElementById('app');
 const isDevelopment = import.meta.env.DEV;
@@ -18,6 +19,7 @@ let selectedExerciseId = exercises[0].id;
 let editorView;
 let solutionEditorView;
 let lastResult = null;
+const autocompleteCompartment = new Compartment();
 
 const editorTheme = EditorView.theme({
   '&': {
@@ -58,6 +60,24 @@ const editorTheme = EditorView.theme({
     backgroundColor: 'var(--cm-invalid-bg)',
     color: 'var(--cm-invalid)',
   },
+  '.cm-tooltip-autocomplete': {
+    border: '1px solid var(--cm-tooltip-border)',
+    borderRadius: '8px',
+    backgroundColor: 'var(--cm-tooltip-bg)',
+    color: 'var(--cm-tooltip-text)',
+    boxShadow: 'var(--cm-tooltip-shadow)',
+    overflow: 'hidden',
+  },
+  '.cm-tooltip-autocomplete > ul': {
+    fontFamily: 'inherit',
+  },
+  '.cm-tooltip-autocomplete ul li': {
+    color: 'var(--cm-tooltip-text)',
+  },
+  '.cm-tooltip-autocomplete ul li[aria-selected]': {
+    backgroundColor: 'var(--cm-tooltip-selected-bg)',
+    color: 'var(--cm-tooltip-selected-text)',
+  },
   '&.cm-focused': {
     outline: 'none',
   },
@@ -86,6 +106,14 @@ const editorHighlightStyle = HighlightStyle.define([
 function insertTwoSpaces(view) {
   view.dispatch(view.state.replaceSelection('  '));
   return true;
+}
+
+function isAutocompleteEnabled() {
+  return localStorage.getItem(autocompleteKey) === 'on';
+}
+
+function getAutocompleteExtension() {
+  return isAutocompleteEnabled() ? autocompletion() : [];
 }
 
 app.innerHTML = `
@@ -164,7 +192,12 @@ app.innerHTML = `
           <section class="editor-section">
             <div class="section-heading">
               <h3>Il tuo codice</h3>
-              <button id="reset-button" class="button secondary" type="button">Reset esercizio</button>
+              <div class="editor-actions">
+                <button id="autocomplete-toggle" class="button secondary toggle-button" type="button" aria-pressed="true">
+                  Autocomplete on
+                </button>
+                <button id="reset-button" class="button secondary" type="button">Reset esercizio</button>
+              </div>
             </div>
             <div id="editor" class="editor-shell"></div>
             <div class="example-card" aria-label="Esempio input output">
@@ -243,6 +276,7 @@ const outputElement = document.getElementById('output');
 const exampleInput = document.getElementById('example-input');
 const exampleOutput = document.getElementById('example-output');
 const runButton = document.getElementById('run-button');
+const autocompleteToggle = document.getElementById('autocomplete-toggle');
 const resetButton = document.getElementById('reset-button');
 const hintsPanel = document.querySelector('.hints-panel');
 const exerciseHints = document.getElementById('exercise-hints');
@@ -530,6 +564,27 @@ function setSolutionCode(code) {
   });
 }
 
+function renderAutocompleteToggle() {
+  const enabled = isAutocompleteEnabled();
+  autocompleteToggle.textContent = enabled ? 'Autocomplete on' : 'Autocomplete off';
+  autocompleteToggle.setAttribute('aria-pressed', String(enabled));
+}
+
+function toggleAutocomplete() {
+  const enabled = !isAutocompleteEnabled();
+
+  if (enabled) {
+    localStorage.setItem(autocompleteKey, 'on');
+  } else {
+    localStorage.removeItem(autocompleteKey);
+  }
+
+  editorView.dispatch({
+    effects: autocompleteCompartment.reconfigure(getAutocompleteExtension()),
+  });
+  renderAutocompleteToggle();
+}
+
 function loadSelectedExercise() {
   const exercise = getSelectedExercise();
   const index = exercises.indexOf(exercise) + 1;
@@ -616,6 +671,7 @@ editorView = new EditorView({
     indentOnInput(),
     bracketMatching(),
     closeBrackets(),
+    autocompleteCompartment.of(getAutocompleteExtension()),
     highlightActiveLine(),
     highlightActiveLineGutter(),
     editorTheme,
@@ -625,6 +681,7 @@ editorView = new EditorView({
       { key: 'Tab', run: insertTwoSpaces },
       { key: 'Shift-Tab', run: indentLess },
       ...closeBracketsKeymap,
+      ...completionKeymap,
       ...defaultKeymap,
       ...historyKeymap,
     ]),
@@ -675,6 +732,7 @@ searchInput.addEventListener('input', () => {
 });
 
 runButton.addEventListener('click', runCurrentExercise);
+autocompleteToggle.addEventListener('click', toggleAutocomplete);
 resetButton.addEventListener('click', resetCurrentExercise);
 
 if (isDevelopment) {
@@ -683,3 +741,4 @@ if (isDevelopment) {
 }
 
 loadSelectedExercise();
+renderAutocompleteToggle();
