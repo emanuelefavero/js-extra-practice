@@ -24,7 +24,11 @@ Alla fine otteniamo una stringa unica, ad esempio "Ciao, Anna!".`,
       'Ricorda che con le stringhe puoi usare `+` per unire saluto, punteggiatura e nome.',
     ],
     tests: [
-      { args: ['Ciao', 'Anna'], expected: 'Ciao, Anna!', message: "saluto con 'Ciao' e 'Anna'" },
+      {
+        args: ['Ciao', 'Anna'],
+        expected: 'Ciao, Anna!',
+        message: "saluto con 'Ciao' e 'Anna'",
+      },
       {
         args: ['Buongiorno', 'Paolo'],
         expected: 'Buongiorno, Paolo!',
@@ -36,7 +40,8 @@ Alla fine otteniamo una stringa unica, ad esempio "Ciao, Anna!".`,
     id: 'snack-02',
     level: 'snack',
     title: 'Restituisci le iniziali dei nomi',
-    prompt: 'Scrivi una funzione che riceve un array di nomi e restituisce un nuovo array con la prima lettera di ogni nome.',
+    prompt:
+      'Scrivi una funzione che riceve un array di nomi e restituisce un nuovo array con la prima lettera di ogni nome.',
     functionName: 'getInitials',
     starterCode: `const getInitials = names => {
 
@@ -50,11 +55,14 @@ Alla fine otteniamo una stringa unica, ad esempio "Ciao, Anna!".`,
 
   return initials;
 };`,
-    explanation: `Vogliamo trasformare un array di nomi in un array di iniziali.
+    explanation:
+      `Vogliamo trasformare un array di nomi in un array di iniziali.
 
 Passaggi:
 1. Prepariamo un array vuoto in cui salvare il risultato.
-2. Per ogni nome leggiamo il primo carattere con ` + '`names[i][0]`' + `.
+2. Per ogni nome leggiamo il primo carattere con ` +
+      '`names[i][0]`' +
+      `.
 3. Aggiungiamo quella lettera nell'array delle iniziali.
 
 Alla fine restituiamo il nuovo array con una iniziale per ogni nome ricevuto.`,
@@ -91,11 +99,14 @@ Alla fine restituiamo il nuovo array con una iniziale per ogni nome ricevuto.`,
 
   return result;
 };`,
-    explanation: `Vogliamo creare un nuovo array che contenga solo i nomi che iniziano con una certa lettera.
+    explanation:
+      `Vogliamo creare un nuovo array che contenga solo i nomi che iniziano con una certa lettera.
 
 Passaggi:
 1. Prepariamo un array vuoto per i nomi che superano il controllo.
-2. Per ogni nome leggiamo il primo carattere con ` + '`name[0]`' + `.
+2. Per ogni nome leggiamo il primo carattere con ` +
+      '`name[0]`' +
+      `.
 3. Se quel carattere e uguale alla lettera cercata, aggiungiamo il nome al risultato.
 
 Alla fine otteniamo un array filtrato, senza modificare l'array originale.`,
@@ -109,14 +120,19 @@ Alla fine otteniamo un array filtrato, senza modificare l'array originale.`,
         expected: ['Bruno', 'Bianca'],
         message: 'nomi che iniziano con B',
       },
-      { args: [['Anna', 'Sofia'], 'M'], expected: [], message: 'nessun nome che inizia con M' },
+      {
+        args: [['Anna', 'Sofia'], 'M'],
+        expected: [],
+        message: 'nessun nome che inizia con M',
+      },
     ],
   },
   {
     id: 'snack-04',
     level: 'snack',
     title: 'Conta il numero di vocali in una stringa',
-    prompt: 'Scrivi una funzione che riceve una stringa e restituisce quante vocali contiene.',
+    prompt:
+      'Scrivi una funzione che riceve una stringa e restituisce quante vocali contiene.',
     functionName: 'countVowels',
     starterCode: `const countVowels = str => {
 
@@ -132,12 +148,19 @@ Alla fine otteniamo un array filtrato, senza modificare l'array originale.`,
 
   return count;
 };`,
-    explanation: `Vogliamo contare quante lettere della stringa sono vocali. Per farlo, confrontiamo ogni carattere con un insieme di vocali valide.
+    explanation:
+      `Vogliamo contare quante lettere della stringa sono vocali. Per farlo, confrontiamo ogni carattere con un insieme di vocali valide.
 
 Passaggi:
-1. Salviamo le vocali in una stringa: ` + '`aeiou`' + `.
-2. Per ogni carattere, creiamo una versione minuscola con ` + '`.toLowerCase()`' + `, cosi anche eventuali maiuscole vengono contate correttamente.
-3. Usiamo ` + '`.includes()`' + ` per verificare se quel carattere e presente tra le vocali.
+1. Salviamo le vocali in una stringa: ` +
+      '`aeiou`' +
+      `.
+2. Per ogni carattere, creiamo una versione minuscola con ` +
+      '`.toLowerCase()`' +
+      `, cosi anche eventuali maiuscole vengono contate correttamente.
+3. Usiamo ` +
+      '`.includes()`' +
+      ` per verificare se quel carattere e presente tra le vocali.
 4. Ogni volta che il controllo e vero, aumentiamo il contatore.
 
 Alla fine il contatore contiene il numero totale di vocali trovate nella stringa.`,
@@ -148,14 +171,19 @@ Alla fine il contatore contiene il numero totale di vocali trovate nella stringa
     tests: [
       { args: ['ciao'], expected: 3, message: "'ciao' contiene 3 vocali" },
       { args: ['JS'], expected: 0, message: "'JS' non contiene vocali" },
-      { args: ['Esercizi'], expected: 4, message: "'Esercizi' contiene 4 vocali" },
+      {
+        args: ['Esercizi'],
+        expected: 4,
+        message: "'Esercizi' contiene 4 vocali",
+      },
     ],
   },
   {
     id: 'snack-05',
     level: 'snack',
     title: 'Restituisci il nome piu lungo',
-    prompt: 'Scrivi una funzione che riceve un array di nomi e restituisce il nome piu lungo.',
+    prompt:
+      'Scrivi una funzione che riceve un array di nomi e restituisce il nome piu lungo.',
     functionName: 'longestName',
     starterCode: `const longestName = names => {
 
@@ -186,9 +214,21 @@ Alla fine restituiamo il nome piu lungo trovato durante il controllo.`,
       'Confronta i nomi usando la proprieta `.length`.',
     ],
     tests: [
-      { args: [['Anna', 'Giorgio', 'Silvia']], expected: 'Giorgio', message: 'Giorgio e il nome piu lungo' },
-      { args: [['Marta']], expected: 'Marta', message: 'Marta e il nome piu lungo' },
-      { args: [[]], expected: '', message: 'array vuoto restituisce stringa vuota' },
+      {
+        args: [['Anna', 'Giorgio', 'Silvia']],
+        expected: 'Giorgio',
+        message: 'Giorgio e il nome piu lungo',
+      },
+      {
+        args: [['Marta']],
+        expected: 'Marta',
+        message: 'Marta e il nome piu lungo',
+      },
+      {
+        args: [[]],
+        expected: '',
+        message: 'array vuoto restituisce stringa vuota',
+      },
     ],
   },
   {
@@ -202,14 +242,19 @@ Alla fine restituiamo il nome piu lungo trovato durante il controllo.`,
 
 };`,
     solution: `const isEven = num => num % 2 === 0;`,
-    explanation: `Vogliamo capire se un numero e divisibile per 2 senza resto.
+    explanation:
+      `Vogliamo capire se un numero e divisibile per 2 senza resto.
 
-Usiamo l'operatore modulo ` + '`%`' + `, che restituisce il resto della divisione. Se ` + '`num % 2`' + ` vale 0, significa che il numero e pari; altrimenti e dispari.
+Usiamo l'operatore modulo ` +
+      '`%`' +
+      `, che restituisce il resto della divisione. Se ` +
+      '`num % 2`' +
+      ` vale 0, significa che il numero e pari; altrimenti e dispari.
 
 Alla fine la funzione restituisce un valore booleano: true per i numeri pari, false per quelli dispari.`,
     hints: [
       'Chiediti se dividendo il numero per 2 rimane un resto.',
-      'L\'operatore `%` serve proprio a leggere il resto di una divisione.',
+      "L'operatore `%` serve proprio a leggere il resto di una divisione.",
     ],
     tests: [
       { args: [4], expected: true, message: '4 dovrebbe essere pari' },
@@ -228,9 +273,12 @@ Alla fine la funzione restituisce un valore booleano: true per i numeri pari, fa
 
 };`,
     solution: `const isEmpty = str => !str;`,
-    explanation: `Vogliamo distinguere una stringa vuota da una stringa che contiene del testo.
+    explanation:
+      `Vogliamo distinguere una stringa vuota da una stringa che contiene del testo.
 
-In JavaScript una stringa vuota viene considerata un valore "falsy". Usando ` + '`!str`' + ` invertiamo questo comportamento: se la stringa e vuota otteniamo true, se contiene testo otteniamo false.
+In JavaScript una stringa vuota viene considerata un valore "falsy". Usando ` +
+      '`!str`' +
+      ` invertiamo questo comportamento: se la stringa e vuota otteniamo true, se contiene testo otteniamo false.
 
 Alla fine la funzione risponde alla domanda: questa stringa e vuota?`,
     hints: [
@@ -238,23 +286,35 @@ Alla fine la funzione risponde alla domanda: questa stringa e vuota?`,
       'Puoi usare `.length` oppure sfruttare il fatto che `""` e un valore falsy.',
     ],
     tests: [
-      { args: [''], expected: true, message: 'stringa vuota dovrebbe tornare true' },
-      { args: ['ciao'], expected: false, message: 'stringa non vuota dovrebbe tornare false' },
+      {
+        args: [''],
+        expected: true,
+        message: 'stringa vuota dovrebbe tornare true',
+      },
+      {
+        args: ['ciao'],
+        expected: false,
+        message: 'stringa non vuota dovrebbe tornare false',
+      },
     ],
   },
   {
     id: 'umano-03',
     level: 'umano',
     title: 'Restituisci la lunghezza di una stringa',
-    prompt: 'Scrivi una funzione che riceve una stringa e restituisce il numero dei suoi caratteri.',
+    prompt:
+      'Scrivi una funzione che riceve una stringa e restituisce il numero dei suoi caratteri.',
     functionName: 'stringLength',
     starterCode: `const stringLength = str => {
 
 };`,
     solution: `const stringLength = str => str.length;`,
-    explanation: `Vogliamo sapere quanti caratteri contiene una stringa.
+    explanation:
+      `Vogliamo sapere quanti caratteri contiene una stringa.
 
-Le stringhe hanno gia una proprieta ` + '`length`' + ` che contiene questa informazione. Non dobbiamo contarli manualmente: leggiamo quel valore e lo restituiamo.
+Le stringhe hanno gia una proprieta ` +
+      '`length`' +
+      ` che contiene questa informazione. Non dobbiamo contarli manualmente: leggiamo quel valore e lo restituiamo.
 
 Alla fine otteniamo un numero, ad esempio 4 per la stringa "ciao".`,
     hints: [
@@ -270,7 +330,8 @@ Alla fine otteniamo un numero, ad esempio 4 per la stringa "ciao".`,
     id: 'umano-04',
     level: 'umano',
     title: 'Restituisci il doppio di un numero',
-    prompt: 'Scrivi una funzione che riceve un numero e restituisce il suo doppio.',
+    prompt:
+      'Scrivi una funzione che riceve un numero e restituisce il suo doppio.',
     functionName: 'double',
     starterCode: `const double = num => {
 
@@ -281,9 +342,7 @@ Alla fine otteniamo un numero, ad esempio 4 per la stringa "ciao".`,
 La soluzione traduce direttamente il problema in codice: moltiplichiamo il numero per 2. Non servono condizioni o cicli, perche il risultato dipende solo da una moltiplicazione.
 
 Alla fine la funzione restituisce il nuovo numero calcolato.`,
-    hints: [
-      'Il doppio di un numero si ottiene moltiplicandolo per 2.',
-    ],
+    hints: ['Il doppio di un numero si ottiene moltiplicandolo per 2.'],
     tests: [
       { args: [5], expected: 10, message: 'doppio di 5 e 10' },
       { args: [0], expected: 0, message: 'doppio di 0 e 0' },
@@ -293,15 +352,19 @@ Alla fine la funzione restituisce il nuovo numero calcolato.`,
     id: 'umano-05',
     level: 'umano',
     title: 'Determina se un numero e positivo',
-    prompt: 'Scrivi una funzione che riceve un numero e restituisce true se e maggiore di zero.',
+    prompt:
+      'Scrivi una funzione che riceve un numero e restituisce true se e maggiore di zero.',
     functionName: 'isPositive',
     starterCode: `const isPositive = num => {
 
 };`,
     solution: `const isPositive = num => num > 0;`,
-    explanation: `Vogliamo verificare se un numero e maggiore di zero.
+    explanation:
+      `Vogliamo verificare se un numero e maggiore di zero.
 
-Usiamo il confronto ` + '`num > 0`' + `. Se il confronto e vero, il numero e positivo. In questa soluzione 0 non viene considerato positivo, perche non e maggiore di 0.
+Usiamo il confronto ` +
+      '`num > 0`' +
+      `. Se il confronto e vero, il numero e positivo. In questa soluzione 0 non viene considerato positivo, perche non e maggiore di 0.
 
 Alla fine la funzione restituisce true solo per i numeri positivi.`,
     hints: [
@@ -325,33 +388,50 @@ Alla fine la funzione restituisce true solo per i numeri positivi.`,
 
 };`,
     solution: `const concatenate = (str1, str2) => str1 + str2;`,
-    explanation: `Vogliamo ottenere una sola stringa partendo da due stringhe separate.
+    explanation:
+      `Vogliamo ottenere una sola stringa partendo da due stringhe separate.
 
-Quando usiamo l'operatore ` + '`+`' + ` con le stringhe, JavaScript le concatena, cioe le attacca una dopo l'altra. In questa soluzione non aggiungiamo spazi automaticamente: il risultato dipende esattamente dalle due stringhe ricevute.
+Quando usiamo l'operatore ` +
+      '`+`' +
+      ` con le stringhe, JavaScript le concatena, cioe le attacca una dopo l'altra. In questa soluzione non aggiungiamo spazi automaticamente: il risultato dipende esattamente dalle due stringhe ricevute.
 
 Alla fine la funzione restituisce la stringa unita.`,
     hints: [
       'Il risultato deve contenere la prima stringa seguita dalla seconda.',
-      'Con le stringhe, l\'operatore `+` non somma: unisce i testi.',
+      "Con le stringhe, l'operatore `+` non somma: unisce i testi.",
     ],
     tests: [
-      { args: ['ciao', 'mondo'], expected: 'ciaomondo', message: "concatenazione di 'ciao' e 'mondo'" },
-      { args: ['', 'test'], expected: 'test', message: 'concatenazione con stringa vuota' },
+      {
+        args: ['ciao', 'mondo'],
+        expected: 'ciaomondo',
+        message: "concatenazione di 'ciao' e 'mondo'",
+      },
+      {
+        args: ['', 'test'],
+        expected: 'test',
+        message: 'concatenazione con stringa vuota',
+      },
     ],
   },
   {
     id: 'umano-07',
     level: 'umano',
     title: 'Determina se un array e vuoto',
-    prompt: 'Scrivi una funzione che riceve un array e restituisce true se non contiene elementi.',
+    prompt:
+      'Scrivi una funzione che riceve un array e restituisce true se non contiene elementi.',
     functionName: 'isArrayEmpty',
     starterCode: `const isArrayEmpty = arr => {
 
 };`,
     solution: `const isArrayEmpty = arr => arr.length === 0;`,
-    explanation: `Vogliamo capire se un array non contiene elementi.
+    explanation:
+      `Vogliamo capire se un array non contiene elementi.
 
-Gli array hanno la proprieta ` + '`length`' + `, che indica quanti elementi ci sono dentro. Se ` + '`arr.length`' + ` vale 0, l'array e vuoto; se vale un numero maggiore di 0, contiene almeno un elemento.
+Gli array hanno la proprieta ` +
+      '`length`' +
+      `, che indica quanti elementi ci sono dentro. Se ` +
+      '`arr.length`' +
+      ` vale 0, l'array e vuoto; se vale un numero maggiore di 0, contiene almeno un elemento.
 
 Alla fine la funzione restituisce true solo quando l'array e vuoto.`,
     hints: [
@@ -359,23 +439,35 @@ Alla fine la funzione restituisce true solo quando l'array e vuoto.`,
       'Controlla il valore di `arr.length`.',
     ],
     tests: [
-      { args: [[]], expected: true, message: 'array vuoto dovrebbe tornare true' },
-      { args: [[1, 2]], expected: false, message: 'array non vuoto dovrebbe tornare false' },
+      {
+        args: [[]],
+        expected: true,
+        message: 'array vuoto dovrebbe tornare true',
+      },
+      {
+        args: [[1, 2]],
+        expected: false,
+        message: 'array non vuoto dovrebbe tornare false',
+      },
     ],
   },
   {
     id: 'umano-08',
     level: 'umano',
     title: 'Restituisci il primo elemento di un array',
-    prompt: 'Scrivi una funzione che riceve un array e restituisce il primo elemento.',
+    prompt:
+      'Scrivi una funzione che riceve un array e restituisce il primo elemento.',
     functionName: 'first',
     starterCode: `const first = arr => {
 
 };`,
     solution: `const first = arr => arr[0];`,
-    explanation: `Vogliamo prendere il primo elemento contenuto in un array.
+    explanation:
+      `Vogliamo prendere il primo elemento contenuto in un array.
 
-Negli array gli indici partono da 0, quindi il primo elemento si trova in posizione ` + '`arr[0]`' + `. La funzione legge quel valore e lo restituisce direttamente.
+Negli array gli indici partono da 0, quindi il primo elemento si trova in posizione ` +
+      '`arr[0]`' +
+      `. La funzione legge quel valore e lo restituisce direttamente.
 
 Alla fine otteniamo il primo elemento dell'array ricevuto.`,
     hints: [
@@ -383,7 +475,11 @@ Alla fine otteniamo il primo elemento dell'array ricevuto.`,
       'Gli indici partono da 0, quindi guarda `arr[0]`.',
     ],
     tests: [
-      { args: [[1, 2, 3]], expected: 1, message: 'primo elemento di [1,2,3] e 1' },
+      {
+        args: [[1, 2, 3]],
+        expected: 1,
+        message: 'primo elemento di [1,2,3] e 1',
+      },
       { args: [[5]], expected: 5, message: 'primo elemento di [5] e 5' },
     ],
   },
@@ -391,20 +487,24 @@ Alla fine otteniamo il primo elemento dell'array ricevuto.`,
     id: 'umano-09',
     level: 'umano',
     title: 'Restituisci la somma di due numeri',
-    prompt: 'Scrivi una funzione che riceve due numeri e restituisce la loro somma.',
+    prompt:
+      'Scrivi una funzione che riceve due numeri e restituisce la loro somma.',
     functionName: 'sum',
     starterCode: `const sum = (a, b) => {
 
 };`,
     solution: `const sum = (a, b) => a + b;`,
-    explanation: `Vogliamo sommare i due numeri ricevuti dalla funzione.
+    explanation:
+      `Vogliamo sommare i due numeri ricevuti dalla funzione.
 
-La soluzione usa l'operatore ` + '`+`' + ` tra i due parametri. In questo caso i valori sono numeri, quindi JavaScript esegue una somma matematica.
+La soluzione usa l'operatore ` +
+      '`+`' +
+      ` tra i due parametri. In questo caso i valori sono numeri, quindi JavaScript esegue una somma matematica.
 
 Alla fine la funzione restituisce il risultato della somma.`,
     hints: [
       'Devi combinare i due parametri numerici in un solo risultato.',
-      'Con i numeri, l\'operatore `+` esegue una somma matematica.',
+      "Con i numeri, l'operatore `+` esegue una somma matematica.",
     ],
     tests: [
       { args: [3, 4], expected: 7, message: 'somma di 3 e 4 e 7' },
@@ -415,7 +515,8 @@ Alla fine la funzione restituisce il risultato della somma.`,
     id: 'umano-10',
     level: 'umano',
     title: 'Restituisci il valore assoluto di un numero',
-    prompt: 'Scrivi una funzione che riceve un numero e restituisce il suo valore assoluto.',
+    prompt:
+      'Scrivi una funzione che riceve un numero e restituisce il suo valore assoluto.',
     functionName: 'absolute',
     starterCode: `const absolute = num => {
 
@@ -424,10 +525,13 @@ Alla fine la funzione restituisce il risultato della somma.`,
   if (num < 0) return -num;
   return num;
 };`,
-    explanation: `Vogliamo ottenere la distanza del numero da zero, senza considerare il segno.
+    explanation:
+      `Vogliamo ottenere la distanza del numero da zero, senza considerare il segno.
 
 Passaggi:
-1. Se il numero e negativo, lo trasformiamo nel suo opposto con ` + '`-num`' + `.
+1. Se il numero e negativo, lo trasformiamo nel suo opposto con ` +
+      '`-num`' +
+      `.
 2. Se il numero e gia positivo o vale 0, lo lasciamo com'e.
 
 Alla fine la funzione restituisce sempre un numero positivo o 0.`,
@@ -445,7 +549,8 @@ Alla fine la funzione restituisce sempre un numero positivo o 0.`,
     id: 'esperto-01',
     level: 'esperto',
     title: 'Determina se un numero e primo',
-    prompt: 'Scrivi una funzione che riceve un numero e restituisce true se e primo.',
+    prompt:
+      'Scrivi una funzione che riceve un numero e restituisce true se e primo.',
     functionName: 'isPrime',
     starterCode: `const isPrime = num => {
 
@@ -459,13 +564,16 @@ Alla fine la funzione restituisce sempre un numero positivo o 0.`,
 
   return true;
 };`,
-    explanation: `Vogliamo capire se un numero ha divisori oltre a 1 e se stesso.
+    explanation:
+      `Vogliamo capire se un numero ha divisori oltre a 1 e se stesso.
 
 Passaggi:
 1. I numeri minori di 2 non sono primi, quindi restituiamo subito false.
 2. Proviamo a dividere il numero per possibili divisori partendo da 2.
 3. Se troviamo un divisore con resto 0, il numero non e primo.
-4. Usiamo ` + '`Math.sqrt(num)`' + ` come limite per evitare controlli inutili: se esiste un divisore grande, ne esiste anche uno piu piccolo gia controllato.
+4. Usiamo ` +
+      '`Math.sqrt(num)`' +
+      ` come limite per evitare controlli inutili: se esiste un divisore grande, ne esiste anche uno piu piccolo gia controllato.
 
 Alla fine, se non troviamo divisori, il numero e primo.`,
     hints: [
@@ -498,29 +606,45 @@ Alla fine, se non troviamo divisori, il numero e primo.`,
 
   return -1;
 };`,
-    explanation: `Vogliamo trovare la posizione di un elemento dentro un array.
+    explanation:
+      `Vogliamo trovare la posizione di un elemento dentro un array.
 
 Passaggi:
 1. Controlliamo gli elementi uno alla volta.
 2. Quando l'elemento corrente e uguale a quello cercato, restituiamo subito il suo indice.
-3. Se arriviamo alla fine senza trovare nulla, restituiamo ` + '`-1`' + `.
+3. Se arriviamo alla fine senza trovare nulla, restituiamo ` +
+      '`-1`' +
+      `.
 
 Alla fine la funzione si comporta come una ricerca: restituisce la posizione se trova l'elemento, altrimenti -1.`,
     hints: [
-      'Scorri l\'array dall\'inizio alla fine controllando un elemento alla volta.',
-      'Quando trovi l\'elemento cercato, l\'indice giusto e la variabile del ciclo.',
+      "Scorri l'array dall'inizio alla fine controllando un elemento alla volta.",
+      "Quando trovi l'elemento cercato, l'indice giusto e la variabile del ciclo.",
     ],
     tests: [
-      { args: [[1, 2, 3], 2], expected: 1, message: 'indice di 2 in [1,2,3] e 1' },
-      { args: [[5, 10, 15], 5], expected: 0, message: 'indice di 5 in [5,10,15] e 0' },
-      { args: [[1, 2, 3], 99], expected: -1, message: 'elemento non trovato dovrebbe tornare -1' },
+      {
+        args: [[1, 2, 3], 2],
+        expected: 1,
+        message: 'indice di 2 in [1,2,3] e 1',
+      },
+      {
+        args: [[5, 10, 15], 5],
+        expected: 0,
+        message: 'indice di 5 in [5,10,15] e 0',
+      },
+      {
+        args: [[1, 2, 3], 99],
+        expected: -1,
+        message: 'elemento non trovato dovrebbe tornare -1',
+      },
     ],
   },
   {
     id: 'esperto-03',
     level: 'esperto',
     title: 'Filtra un array mantenendo solo i numeri pari',
-    prompt: 'Scrivi una funzione che riceve un array di numeri e restituisce un nuovo array con solo i numeri pari.',
+    prompt:
+      'Scrivi una funzione che riceve un array di numeri e restituisce un nuovo array con solo i numeri pari.',
     functionName: 'filterEven',
     starterCode: `const filterEven = arr => {
 
@@ -535,13 +659,18 @@ Alla fine la funzione si comporta come una ricerca: restituisce la posizione se 
 
   return result;
 };`,
-    explanation: `Vogliamo creare un nuovo array che contenga solo i numeri pari.
+    explanation:
+      `Vogliamo creare un nuovo array che contenga solo i numeri pari.
 
 Passaggi:
 1. Prepariamo un array vuoto per il risultato.
 2. Controlliamo ogni numero con l'operatore modulo.
-3. Se ` + '`num % 2`' + ` vale 0, il numero e pari.
-4. Quando il numero e pari, lo aggiungiamo al risultato con ` + '`.push()`' + `.
+3. Se ` +
+      '`num % 2`' +
+      ` vale 0, il numero e pari.
+4. Quando il numero e pari, lo aggiungiamo al risultato con ` +
+      '`.push()`' +
+      `.
 
 Alla fine restituiamo il nuovo array filtrato.`,
     hints: [
@@ -549,8 +678,16 @@ Alla fine restituiamo il nuovo array filtrato.`,
       'Un numero pari ha resto 0 quando viene diviso per 2.',
     ],
     tests: [
-      { args: [[1, 2, 3, 4]], expected: [2, 4], message: 'filtrando [1,2,3,4] restituisce [2,4]' },
-      { args: [[1, 3, 5]], expected: [], message: 'filtrando [1,3,5] restituisce []' },
+      {
+        args: [[1, 2, 3, 4]],
+        expected: [2, 4],
+        message: 'filtrando [1,2,3,4] restituisce [2,4]',
+      },
+      {
+        args: [[1, 3, 5]],
+        expected: [],
+        message: 'filtrando [1,3,5] restituisce []',
+      },
     ],
   },
   {
@@ -593,7 +730,8 @@ Alla fine, se nessun confronto fallisce, la stringa e palindroma.`,
     id: 'esperto-05',
     level: 'esperto',
     title: 'Restituisci la somma di tutti gli elementi di un array',
-    prompt: 'Scrivi una funzione che riceve un array di numeri e restituisce la somma totale.',
+    prompt:
+      'Scrivi una funzione che riceve un array di numeri e restituisce la somma totale.',
     functionName: 'sumArray',
     starterCode: `const sumArray = arr => {
 
@@ -618,7 +756,7 @@ Passaggi:
 Alla fine restituiamo il totale calcolato.`,
     hints: [
       'Prepara una variabile totale che parte da 0.',
-      'Durante il ciclo aggiungi ogni numero dell\'array al totale.',
+      "Durante il ciclo aggiungi ogni numero dell'array al totale.",
     ],
     tests: [
       { args: [[1, 2, 3]], expected: 6, message: 'somma di [1,2,3] e 6' },
@@ -630,7 +768,8 @@ Alla fine restituiamo il totale calcolato.`,
     id: 'esperto-06',
     level: 'esperto',
     title: 'Determina se due array hanno gli stessi elementi',
-    prompt: 'Scrivi una funzione che riceve due array e restituisce true se hanno gli stessi elementi nello stesso ordine.',
+    prompt:
+      'Scrivi una funzione che riceve due array e restituisce true se hanno gli stessi elementi nello stesso ordine.',
     functionName: 'arraysEqual',
     starterCode: `const arraysEqual = (arr1, arr2) => {
 
@@ -657,8 +796,22 @@ Alla fine restituiamo true solo se tutti gli elementi corrispondono nella stessa
       'Se le lunghezze coincidono, confronta gli elementi con lo stesso indice.',
     ],
     tests: [
-      { args: [[1, 2, 3], [1, 2, 3]], expected: true, message: '[1,2,3] e [1,2,3] sono uguali' },
-      { args: [[1, 2], [2, 1]], expected: false, message: '[1,2] e [2,1] non sono uguali' },
+      {
+        args: [
+          [1, 2, 3],
+          [1, 2, 3],
+        ],
+        expected: true,
+        message: '[1,2,3] e [1,2,3] sono uguali',
+      },
+      {
+        args: [
+          [1, 2],
+          [2, 1],
+        ],
+        expected: false,
+        message: '[1,2] e [2,1] non sono uguali',
+      },
       { args: [[], []], expected: true, message: 'array vuoti sono uguali' },
     ],
   },
@@ -666,7 +819,8 @@ Alla fine restituiamo true solo se tutti gli elementi corrispondono nella stessa
     id: 'esperto-07',
     level: 'esperto',
     title: 'Raddoppia ogni elemento di un array',
-    prompt: 'Scrivi una funzione che riceve un array di numeri e restituisce un array con ogni elemento raddoppiato.',
+    prompt:
+      'Scrivi una funzione che riceve un array di numeri e restituisce un array con ogni elemento raddoppiato.',
     functionName: 'doubleArray',
     starterCode: `const doubleArray = arr => {
 
@@ -686,19 +840,28 @@ Passaggi:
 
 Alla fine restituiamo l'array con tutti i numeri raddoppiati. Questa soluzione modifica direttamente l'array ricevuto.`,
     hints: [
-      'Scorri l\'array con un ciclo e lavora su un elemento alla volta.',
-      'Per cambiare un valore dentro l\'array, assegna il nuovo valore nella stessa posizione.',
+      "Scorri l'array con un ciclo e lavora su un elemento alla volta.",
+      "Per cambiare un valore dentro l'array, assegna il nuovo valore nella stessa posizione.",
     ],
     tests: [
-      { args: [[1, 2, 3]], expected: [2, 4, 6], message: 'raddoppiando [1,2,3] restituisce [2,4,6]' },
-      { args: [[5]], expected: [10], message: 'raddoppiando [5] restituisce [10]' },
+      {
+        args: [[1, 2, 3]],
+        expected: [2, 4, 6],
+        message: 'raddoppiando [1,2,3] restituisce [2,4,6]',
+      },
+      {
+        args: [[5]],
+        expected: [10],
+        message: 'raddoppiando [5] restituisce [10]',
+      },
     ],
   },
   {
     id: 'esperto-08',
     level: 'esperto',
     title: 'Ordina un array di numeri',
-    prompt: 'Scrivi una funzione che riceve un array di numeri e lo restituisce ordinato dal piu piccolo al piu grande.',
+    prompt:
+      'Scrivi una funzione che riceve un array di numeri e lo restituisce ordinato dal piu piccolo al piu grande.',
     functionName: 'sort',
     starterCode: `const sort = arr => {
 
@@ -729,20 +892,29 @@ Passaggi:
 
 Alla fine l'array risulta ordinato in modo crescente.`,
     hints: [
-      'Confronta coppie di numeri vicini: se sono nell\'ordine sbagliato, scambiali.',
+      "Confronta coppie di numeri vicini: se sono nell'ordine sbagliato, scambiali.",
       'Ripeti i confronti piu volte, perche un solo passaggio non basta sempre a ordinare tutto.',
     ],
     tests: [
-      { args: [[3, 1, 2]], expected: [1, 2, 3], message: 'ordinando [3,1,2] restituisce [1,2,3]' },
+      {
+        args: [[3, 1, 2]],
+        expected: [1, 2, 3],
+        message: 'ordinando [3,1,2] restituisce [1,2,3]',
+      },
       { args: [[5]], expected: [5], message: 'ordinando [5] restituisce [5]' },
-      { args: [[3, -1, 2, 2]], expected: [-1, 2, 2, 3], message: 'funziona con negativi e duplicati' },
+      {
+        args: [[3, -1, 2, 2]],
+        expected: [-1, 2, 2, 3],
+        message: 'funziona con negativi e duplicati',
+      },
     ],
   },
   {
     id: 'esperto-09',
     level: 'esperto',
     title: 'Restituisci il numero piu grande di un array',
-    prompt: 'Scrivi una funzione che riceve un array di numeri e restituisce il numero piu grande.',
+    prompt:
+      'Scrivi una funzione che riceve un array di numeri e restituisce il numero piu grande.',
     functionName: 'max',
     starterCode: `const max = arr => {
 
@@ -782,7 +954,8 @@ Alla fine restituiamo il valore piu grande trovato.`,
     id: 'esperto-10',
     level: 'esperto',
     title: 'Determina se un array contiene un numero specifico',
-    prompt: 'Scrivi una funzione che riceve un array e un numero, poi restituisce true se il numero e presente.',
+    prompt:
+      'Scrivi una funzione che riceve un array e un numero, poi restituisce true se il numero e presente.',
     functionName: 'includes',
     starterCode: `const includes = (arr, num) => {
 
@@ -803,12 +976,16 @@ Passaggi:
 
 Alla fine la funzione risponde con un booleano: true se il numero esiste nell'array, false se non esiste.`,
     hints: [
-      'Scorri l\'array e confronta ogni elemento con il numero cercato.',
+      "Scorri l'array e confronta ogni elemento con il numero cercato.",
       'Se trovi una corrispondenza puoi restituire subito true; se arrivi alla fine, restituisci false.',
     ],
     tests: [
       { args: [[1, 2, 3], 2], expected: true, message: '[1,2,3] contiene 2' },
-      { args: [[1, 2, 3], 5], expected: false, message: '[1,2,3] non contiene 5' },
+      {
+        args: [[1, 2, 3], 5],
+        expected: false,
+        message: '[1,2,3] non contiene 5',
+      },
     ],
   },
 ];

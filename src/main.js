@@ -1,10 +1,35 @@
-import { defaultKeymap, history, historyKeymap, indentLess } from '@codemirror/commands';
-import { acceptCompletion, autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap, completionStatus } from '@codemirror/autocomplete';
+import {
+  defaultKeymap,
+  history,
+  historyKeymap,
+  indentLess,
+} from '@codemirror/commands';
+import {
+  acceptCompletion,
+  autocompletion,
+  closeBrackets,
+  closeBracketsKeymap,
+  completionKeymap,
+  completionStatus,
+} from '@codemirror/autocomplete';
 import { javascript } from '@codemirror/lang-javascript';
-import { bracketMatching, HighlightStyle, indentOnInput, indentUnit, syntaxHighlighting, syntaxTree } from '@codemirror/language';
+import {
+  bracketMatching,
+  HighlightStyle,
+  indentOnInput,
+  indentUnit,
+  syntaxHighlighting,
+  syntaxTree,
+} from '@codemirror/language';
 import { linter, lintGutter, lintKeymap } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
-import { EditorView, highlightActiveLine, highlightActiveLineGutter, keymap, lineNumbers } from '@codemirror/view';
+import {
+  EditorView,
+  highlightActiveLine,
+  highlightActiveLineGutter,
+  keymap,
+  lineNumbers,
+} from '@codemirror/view';
 import { tags } from '@lezer/highlight';
 import './style.css';
 import { exercises } from './exercises.js';
@@ -40,9 +65,10 @@ const editorTheme = EditorView.theme({
   '.cm-cursor, .cm-dropCursor': {
     borderLeftColor: 'var(--cm-caret)',
   },
-  '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': {
-    backgroundColor: 'var(--cm-selection)',
-  },
+  '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection':
+    {
+      backgroundColor: 'var(--cm-selection)',
+    },
   '.cm-gutters': {
     backgroundColor: 'var(--cm-gutter-bg)',
     color: 'var(--cm-gutter-text)',
@@ -105,21 +131,60 @@ const editorTheme = EditorView.theme({
 
 const editorHighlightStyle = HighlightStyle.define([
   { tag: tags.keyword, color: 'var(--cm-keyword)' },
-  { tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName], color: 'var(--cm-name)' },
-  { tag: [tags.function(tags.variableName), tags.labelName], color: 'var(--cm-function)' },
-  { tag: [tags.color, tags.constant(tags.name), tags.standard(tags.name)], color: 'var(--cm-name)' },
-  { tag: [tags.definition(tags.name), tags.separator], color: 'var(--cm-text)' },
-  { tag: [tags.typeName, tags.className, tags.number, tags.changed, tags.annotation, tags.modifier, tags.self, tags.namespace], color: 'var(--cm-number)' },
+  {
+    tag: [
+      tags.name,
+      tags.deleted,
+      tags.character,
+      tags.propertyName,
+      tags.macroName,
+    ],
+    color: 'var(--cm-name)',
+  },
+  {
+    tag: [tags.function(tags.variableName), tags.labelName],
+    color: 'var(--cm-function)',
+  },
+  {
+    tag: [tags.color, tags.constant(tags.name), tags.standard(tags.name)],
+    color: 'var(--cm-name)',
+  },
+  {
+    tag: [tags.definition(tags.name), tags.separator],
+    color: 'var(--cm-text)',
+  },
+  {
+    tag: [
+      tags.typeName,
+      tags.className,
+      tags.number,
+      tags.changed,
+      tags.annotation,
+      tags.modifier,
+      tags.self,
+      tags.namespace,
+    ],
+    color: 'var(--cm-number)',
+  },
   { tag: [tags.operator, tags.operatorKeyword], color: 'var(--cm-keyword)' },
-  { tag: [tags.url, tags.escape, tags.regexp, tags.link], color: 'var(--cm-string)' },
+  {
+    tag: [tags.url, tags.escape, tags.regexp, tags.link],
+    color: 'var(--cm-string)',
+  },
   { tag: [tags.meta, tags.comment], color: 'var(--cm-comment)' },
   { tag: tags.strong, fontWeight: '700' },
   { tag: tags.emphasis, fontStyle: 'italic' },
   { tag: tags.strikethrough, textDecoration: 'line-through' },
   { tag: tags.link, textDecoration: 'underline' },
   { tag: tags.heading, fontWeight: '700', color: 'var(--cm-name)' },
-  { tag: [tags.atom, tags.bool, tags.special(tags.variableName)], color: 'var(--cm-name)' },
-  { tag: [tags.processingInstruction, tags.string, tags.inserted], color: 'var(--cm-string)' },
+  {
+    tag: [tags.atom, tags.bool, tags.special(tags.variableName)],
+    color: 'var(--cm-name)',
+  },
+  {
+    tag: [tags.processingInstruction, tags.string, tags.inserted],
+    color: 'var(--cm-string)',
+  },
   { tag: tags.invalid, color: 'var(--cm-invalid)' },
 ]);
 
@@ -147,11 +212,13 @@ function moveFocusFromEditor(view, direction) {
     '[contenteditable="true"]',
   ].join(', ');
 
-  const focusableElements = Array.from(document.querySelectorAll(focusableSelector)).filter(
-    element => element.getAttribute('aria-hidden') !== 'true'
-  );
+  const focusableElements = Array.from(
+    document.querySelectorAll(focusableSelector),
+  ).filter(element => element.getAttribute('aria-hidden') !== 'true');
   const activeIndex = focusableElements.findIndex(
-    element => element === document.activeElement || element.contains(document.activeElement)
+    element =>
+      element === document.activeElement ||
+      element.contains(document.activeElement),
   );
 
   if (activeIndex === -1) {
@@ -381,7 +448,9 @@ const exampleInput = document.getElementById('example-input');
 const exampleOutput = document.getElementById('example-output');
 const runButton = document.getElementById('run-button');
 const autocompleteToggle = document.getElementById('autocomplete-toggle');
-const syntaxDiagnosticsToggle = document.getElementById('syntax-diagnostics-toggle');
+const syntaxDiagnosticsToggle = document.getElementById(
+  'syntax-diagnostics-toggle',
+);
 const resetButton = document.getElementById('reset-button');
 const hintsPanel = document.querySelector('.hints-panel');
 const exerciseHints = document.getElementById('exercise-hints');
@@ -416,7 +485,9 @@ function markCompleted(id) {
 }
 
 function unmarkCompleted(id) {
-  const completedIds = getCompletedIds().filter(completedId => completedId !== id);
+  const completedIds = getCompletedIds().filter(
+    completedId => completedId !== id,
+  );
   saveCompletedIds(completedIds);
 }
 
@@ -440,8 +511,11 @@ function getFilteredExercises() {
   const searchText = normalizeText(searchInput.value);
 
   return exercises.filter(exercise => {
-    const matchesLevel = selectedLevel === 'all' || exercise.level === selectedLevel;
-    const searchableText = normalizeText(`${exercise.level} ${exercise.title} ${exercise.prompt} ${exercise.functionName}`);
+    const matchesLevel =
+      selectedLevel === 'all' || exercise.level === selectedLevel;
+    const searchableText = normalizeText(
+      `${exercise.level} ${exercise.title} ${exercise.prompt} ${exercise.functionName}`,
+    );
     const matchesSearch = searchableText.includes(searchText);
 
     return matchesLevel && matchesSearch;
@@ -583,10 +657,12 @@ function runExerciseTests(exercise, code) {
 function renderExerciseList() {
   const filteredExercises = getFilteredExercises();
   visibleCount.textContent = filteredExercises.length;
-  visibleLabel.textContent = filteredExercises.length === 1 ? 'esercizio visibile' : 'esercizi visibili';
+  visibleLabel.textContent =
+    filteredExercises.length === 1 ? 'esercizio visibile' : 'esercizi visibili';
 
   if (filteredExercises.length === 0) {
-    exerciseList.innerHTML = '<p class="empty-state">Nessun esercizio trovato.</p>';
+    exerciseList.innerHTML =
+      '<p class="empty-state">Nessun esercizio trovato.</p>';
     return;
   }
 
@@ -710,7 +786,9 @@ function setSolutionCode(code) {
 function renderAutocompleteToggle() {
   const enabled = isAutocompleteEnabled();
   autocompleteToggle.setAttribute('aria-pressed', String(enabled));
-  autocompleteToggle.title = enabled ? 'Disattiva autocompletamento' : 'Attiva autocompletamento';
+  autocompleteToggle.title = enabled
+    ? 'Disattiva autocompletamento'
+    : 'Attiva autocompletamento';
 }
 
 function toggleAutocomplete() {
@@ -731,7 +809,9 @@ function toggleAutocomplete() {
 function renderSyntaxDiagnosticsToggle() {
   const enabled = isSyntaxDiagnosticsEnabled();
   syntaxDiagnosticsToggle.setAttribute('aria-pressed', String(enabled));
-  syntaxDiagnosticsToggle.title = enabled ? 'Disattiva diagnostica sintassi' : 'Attiva diagnostica sintassi';
+  syntaxDiagnosticsToggle.title = enabled
+    ? 'Disattiva diagnostica sintassi'
+    : 'Attiva diagnostica sintassi';
 }
 
 function toggleSyntaxDiagnostics() {
@@ -744,7 +824,9 @@ function toggleSyntaxDiagnostics() {
   }
 
   editorView.dispatch({
-    effects: syntaxDiagnosticsCompartment.reconfigure(getSyntaxDiagnosticsExtension()),
+    effects: syntaxDiagnosticsCompartment.reconfigure(
+      getSyntaxDiagnosticsExtension(),
+    ),
   });
   renderSyntaxDiagnosticsToggle();
 }
@@ -765,7 +847,9 @@ function loadSelectedExercise() {
   exampleOutput.textContent = formatValue(exercise.tests[0].expected);
   hintsPanel.open = false;
   solutionPanel.open = false;
-  exerciseStatus.textContent = isCompleted(exercise.id) ? 'Completato' : 'Da fare';
+  exerciseStatus.textContent = isCompleted(exercise.id)
+    ? 'Completato'
+    : 'Da fare';
   exerciseStatus.className = `status-pill ${isCompleted(exercise.id) ? 'completed' : ''}`;
 
   setEditorCode(getSavedCode(exercise));
@@ -788,7 +872,9 @@ function runCurrentExercise() {
   renderOutput(lastResult);
   renderProgress();
   renderExerciseList();
-  exerciseStatus.textContent = isCompleted(exercise.id) ? 'Completato' : 'Da fare';
+  exerciseStatus.textContent = isCompleted(exercise.id)
+    ? 'Completato'
+    : 'Da fare';
   exerciseStatus.className = `status-pill ${isCompleted(exercise.id) ? 'completed' : ''}`;
 }
 
