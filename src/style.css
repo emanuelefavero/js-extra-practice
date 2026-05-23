@@ -588,6 +588,8 @@ button:focus-visible {
 
 .solution-editor-shell {
   min-height: 0;
+  overflow: auto;
+  max-width: 100%;
 }
 
 .example-card {
@@ -640,6 +642,10 @@ button:focus-visible {
 .solution-editor-shell .cm-scroller {
   max-height: 360px;
   overflow: auto;
+}
+
+.solution-content > * {
+  min-width: 0;
 }
 
 .output-box {
@@ -817,14 +823,26 @@ code {
 @media (max-width: 960px) {
   .app-layout {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .exercise-panel {
     position: static;
+    order: 1;
+    padding: 14px;
+  }
+
+  .practice-area {
+    order: 0;
+  }
+
+  .toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .exercise-list {
-    max-height: none;
+    max-height: min(38vh, 320px);
+    overscroll-behavior: contain;
   }
 }
 
@@ -836,6 +854,10 @@ code {
 
   .summary-box {
     min-width: 0;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr;
   }
 
   .work-grid,
@@ -873,5 +895,20 @@ code {
 
   .button {
     width: 100%;
+  }
+
+  .solution-editor-shell {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .solution-editor-shell .cm-editor,
+  .solution-editor-shell .cm-scroller {
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  .solution-editor-shell .cm-scroller {
+    overscroll-behavior-x: contain;
   }
 }

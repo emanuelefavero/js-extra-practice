@@ -73,6 +73,12 @@ For very simple exercises, a short paragraph is enough.
 - Hint toggle hidden by default, with beginner-friendly `Suggerimenti` above
   the solution/explanation toggle.
 - Solution/explanation toggle hidden by default.
+- On mobile, the practice workspace appears before the exercise list so the
+  editor and test flow are easier to reach.
+- On mobile, the exercise list stays compact and scrollable instead of pushing
+  the workspace too far down the page.
+- On narrow screens, the read-only solution editor stays scrollable without
+  breaking the page layout.
 - The hint and solution toggles reset to hidden when switching exercise.
 - Completion state saved in `localStorage`.
 - Student code saved per exercise in `localStorage`.
