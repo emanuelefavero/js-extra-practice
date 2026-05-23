@@ -568,6 +568,12 @@ button:focus-visible {
   color: var(--accent-dark);
 }
 
+.toggle-button[aria-pressed='true']:hover {
+  border-color: var(--active-border);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
 .editor-actions .button {
   padding-inline: 10px;
 }
