@@ -1,8 +1,9 @@
 import { defaultKeymap, history, historyKeymap, indentLess } from '@codemirror/commands';
+import { closeBrackets, closeBracketsKeymap } from '@codemirror/autocomplete';
 import { javascript } from '@codemirror/lang-javascript';
-import { bracketMatching, HighlightStyle, indentUnit, syntaxHighlighting } from '@codemirror/language';
+import { bracketMatching, HighlightStyle, indentOnInput, indentUnit, syntaxHighlighting } from '@codemirror/language';
 import { EditorState } from '@codemirror/state';
-import { EditorView, keymap, lineNumbers } from '@codemirror/view';
+import { EditorView, highlightActiveLine, highlightActiveLineGutter, keymap, lineNumbers } from '@codemirror/view';
 import { tags } from '@lezer/highlight';
 import './style.css';
 import { exercises } from './exercises.js';
@@ -47,6 +48,15 @@ const editorTheme = EditorView.theme({
   '.cm-activeLineGutter': {
     backgroundColor: 'var(--cm-active-gutter-bg)',
     color: 'var(--cm-active-gutter-text)',
+  },
+  '.cm-matchingBracket': {
+    backgroundColor: 'var(--cm-bracket-bg)',
+    color: 'var(--cm-bracket-text)',
+  },
+  '.cm-nonmatchingBracket': {
+    outline: '1px solid var(--cm-invalid)',
+    backgroundColor: 'var(--cm-invalid-bg)',
+    color: 'var(--cm-invalid)',
   },
   '&.cm-focused': {
     outline: 'none',
@@ -603,13 +613,18 @@ editorView = new EditorView({
   extensions: [
     lineNumbers(),
     history(),
+    indentOnInput(),
     bracketMatching(),
+    closeBrackets(),
+    highlightActiveLine(),
+    highlightActiveLineGutter(),
     editorTheme,
     syntaxHighlighting(editorHighlightStyle),
     javascript(),
     keymap.of([
       { key: 'Tab', run: insertTwoSpaces },
       { key: 'Shift-Tab', run: indentLess },
+      ...closeBracketsKeymap,
       ...defaultKeymap,
       ...historyKeymap,
     ]),

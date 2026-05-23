@@ -53,6 +53,10 @@ For very simple exercises, a short paragraph is enough.
 - One focused exercise workspace at a time.
 - Level filter and text search.
 - CodeMirror editor for writing solutions.
+- CodeMirror auto-closes parentheses, brackets, braces, and quotes in the
+  student editor.
+- CodeMirror highlights the active line, auto-indents after structural input,
+  and uses visible matching/non-matching bracket styles.
 - Read-only CodeMirror block for official solutions with syntax highlighting.
 - Example input and expected output shown below the editor.
 - `Esegui test` button that runs exercise tests in the browser.

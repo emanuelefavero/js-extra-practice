@@ -48,6 +48,10 @@
   --cm-string: #0a3069;
   --cm-comment: #6e7781;
   --cm-invalid: #82071e;
+  --cm-invalid-bg: #ffebe9;
+  --cm-bracket-bg: rgba(79, 70, 229, 0.14);
+  --cm-bracket-border: #818cf8;
+  --cm-bracket-text: #0f172a;
   --control-shadow: 0 1px 1px rgba(15, 23, 42, 0.02);
   --summary-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   --on-solid: #fff;
@@ -106,6 +110,10 @@
     --cm-string: #a5d6ff;
     --cm-comment: #8b949e;
     --cm-invalid: #ffa198;
+    --cm-invalid-bg: #3d1519;
+    --cm-bracket-bg: rgba(88, 166, 255, 0.18);
+    --cm-bracket-border: #58a6ff;
+    --cm-bracket-text: #f0f6fc;
     --control-shadow: none;
     --summary-shadow: none;
     --on-solid: #ffffff;

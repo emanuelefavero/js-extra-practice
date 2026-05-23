@@ -68,6 +68,8 @@ Nella pagina puoi:
 - filtrare gli esercizi per livello;
 - cercare per titolo, traccia o nome funzione;
 - scrivere il codice nell'editor;
+- usare la chiusura automatica di parentesi, graffe, quadre e virgolette nell'editor;
+- vedere la riga attiva, l'indentazione automatica e le parentesi abbinate evidenziate;
 - eseguire i test con `Esegui test`;
 - vedere l'output con test passati o falliti;
 - aprire i suggerimenti con il toggle "Mostra suggerimenti";
