@@ -1,5 +1,5 @@
 import { defaultKeymap, history, historyKeymap, indentLess } from '@codemirror/commands';
-import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap } from '@codemirror/autocomplete';
+import { acceptCompletion, autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap, completionStatus } from '@codemirror/autocomplete';
 import { javascript } from '@codemirror/lang-javascript';
 import { bracketMatching, HighlightStyle, indentOnInput, indentUnit, syntaxHighlighting, syntaxTree } from '@codemirror/language';
 import { linter, lintGutter, lintKeymap } from '@codemirror/lint';
@@ -125,6 +125,54 @@ const editorHighlightStyle = HighlightStyle.define([
 function insertTwoSpaces(view) {
   view.dispatch(view.state.replaceSelection('  '));
   return true;
+}
+
+function handleEditorTab(view) {
+  if (completionStatus(view.state) === 'active' && acceptCompletion(view)) {
+    return true;
+  }
+
+  return insertTwoSpaces(view);
+}
+
+function moveFocusFromEditor(view, direction) {
+  const focusableSelector = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+    '[contenteditable="true"]',
+  ].join(', ');
+
+  const focusableElements = Array.from(document.querySelectorAll(focusableSelector)).filter(
+    element => element.getAttribute('aria-hidden') !== 'true'
+  );
+  const activeIndex = focusableElements.findIndex(
+    element => element === document.activeElement || element.contains(document.activeElement)
+  );
+
+  if (activeIndex === -1) {
+    view.contentDOM.blur();
+    return true;
+  }
+
+  const targetElement = focusableElements[activeIndex + direction];
+
+  if (!targetElement) {
+    view.contentDOM.blur();
+    return true;
+  }
+
+  targetElement.focus();
+  return true;
+}
+
+function leaveEditorForward(view) {
+  if (completionStatus(view.state)) return false;
+
+  return moveFocusFromEditor(view, 1);
 }
 
 function isAutocompleteEnabled() {
@@ -755,8 +803,9 @@ editorView = new EditorView({
     syntaxHighlighting(editorHighlightStyle),
     javascript(),
     keymap.of([
-      { key: 'Tab', run: insertTwoSpaces },
+      { key: 'Tab', run: handleEditorTab },
       { key: 'Shift-Tab', run: indentLess },
+      { key: 'Escape', run: leaveEditorForward },
       ...closeBracketsKeymap,
       ...completionKeymap,
       ...lintKeymap,
