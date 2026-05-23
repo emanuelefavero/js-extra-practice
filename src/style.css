@@ -173,7 +173,7 @@ button {
 }
 
 .container {
-  width: min(1320px, calc(100% - 32px));
+  width: min(1440px, calc(100% - 32px));
   margin: 0 auto;
 }
 
