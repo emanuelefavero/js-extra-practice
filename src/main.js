@@ -691,7 +691,15 @@ function renderExerciseList() {
 }
 
 async function launchCompletionConfetti() {
-  const { default: confetti } = await import('canvas-confetti');
+  let confetti;
+
+  try {
+    ({ default: confetti } = await import('canvas-confetti'));
+  } catch (error) {
+    console.warn('Animazione coriandoli non disponibile:', error);
+    return;
+  }
+
   const sharedOptions = {
     disableForReducedMotion: true,
     zIndex: 1200,
