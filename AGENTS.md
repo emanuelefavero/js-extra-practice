@@ -87,6 +87,8 @@ For very simple exercises, a short paragraph is enough.
   `prefers-color-scheme`, including the CodeMirror editor theme.
 - Final success message after all exercises are completed:
   `Tutti gli esercizi completati. Ecco un’arancina! 🍘`
+- When all exercises become completed, a small confetti animation is shown once
+  as a celebration, respecting reduced-motion preferences.
 - Development-only helper buttons, visible only with `npm run dev` through
   `import.meta.env.DEV`:
   - `Completa tutto`;

@@ -21,6 +21,7 @@ let selectedExerciseId = exercises[0].id;
 let editorView;
 let solutionEditorView;
 let lastResult = null;
+let wasAllExercisesCompleted = false;
 const autocompleteCompartment = new Compartment();
 const syntaxDiagnosticsCompartment = new Compartment();
 
@@ -419,6 +420,8 @@ function unmarkCompleted(id) {
   saveCompletedIds(completedIds);
 }
 
+wasAllExercisesCompleted = getCompletedIds().length === exercises.length;
+
 function getSavedCode(exercise) {
   return localStorage.getItem(codeKey(exercise.id)) || exercise.starterCode;
 }
@@ -611,6 +614,33 @@ function renderExerciseList() {
     .join('');
 }
 
+async function launchCompletionConfetti() {
+  const { default: confetti } = await import('canvas-confetti');
+  const sharedOptions = {
+    disableForReducedMotion: true,
+    zIndex: 1200,
+    scalar: 0.9,
+    ticks: 180,
+    colors: ['#4f46e5', '#1f883d', '#58a6ff', '#f59e0b'],
+  };
+
+  confetti({
+    ...sharedOptions,
+    particleCount: 70,
+    spread: 70,
+    startVelocity: 34,
+    origin: { x: 0.2, y: 0.15 },
+  });
+
+  confetti({
+    ...sharedOptions,
+    particleCount: 70,
+    spread: 70,
+    startVelocity: 34,
+    origin: { x: 0.8, y: 0.15 },
+  });
+}
+
 function renderProgress() {
   const completedCount = getCompletedIds().length;
   const allCompleted = completedCount === exercises.length;
@@ -618,6 +648,12 @@ function renderProgress() {
   progressCount.textContent = `${completedCount} / ${exercises.length}`;
   summaryBox.classList.toggle('completed', allCompleted);
   successMessage.hidden = !allCompleted;
+
+  if (allCompleted && !wasAllExercisesCompleted) {
+    void launchCompletionConfetti();
+  }
+
+  wasAllExercisesCompleted = allCompleted;
 }
 
 function renderOutput(result) {
