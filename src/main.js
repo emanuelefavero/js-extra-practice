@@ -617,7 +617,7 @@ function runExerciseTests(exercise, code) {
   if (typeof userFunction !== 'function') {
     return {
       passed: false,
-      error: `La funzione ${exercise.functionName} non e stata trovata.`,
+      error: `La funzione ${exercise.functionName} non è stata trovata.`,
       tests: [],
     };
   }

@@ -20,7 +20,7 @@ Passaggi:
 
 Alla fine otteniamo una stringa unica, ad esempio "Ciao, Anna!".`,
     hints: [
-      'Pensa al risultato come a una frase costruita attaccando piu pezzi di testo.',
+      'Pensa al risultato come a una frase costruita attaccando più pezzi di testo.',
       'Ricorda che con le stringhe puoi usare `+` per unire saluto, punteggiatura e nome.',
     ],
     tests: [
@@ -68,7 +68,7 @@ Passaggi:
 Alla fine restituiamo il nuovo array con una iniziale per ogni nome ricevuto.`,
     hints: [
       'Ti serve un array nuovo dove raccogliere le iniziali una alla volta.',
-      'Dentro il ciclo, il primo carattere di un nome si puo leggere con `[0]`.',
+      'Dentro il ciclo, il primo carattere di un nome si può leggere con `[0]`.',
     ],
     tests: [
       {
@@ -107,7 +107,7 @@ Passaggi:
 2. Per ogni nome leggiamo il primo carattere con ` +
       '`name[0]`' +
       `.
-3. Se quel carattere e uguale alla lettera cercata, aggiungiamo il nome al risultato.
+3. Se quel carattere è uguale alla lettera cercata, aggiungiamo il nome al risultato.
 
 Alla fine otteniamo un array filtrato, senza modificare l'array originale.`,
     hints: [
@@ -157,16 +157,16 @@ Passaggi:
       `.
 2. Per ogni carattere, creiamo una versione minuscola con ` +
       '`.toLowerCase()`' +
-      `, cosi anche eventuali maiuscole vengono contate correttamente.
+      `, così anche eventuali maiuscole vengono contate correttamente.
 3. Usiamo ` +
       '`.includes()`' +
-      ` per verificare se quel carattere e presente tra le vocali.
-4. Ogni volta che il controllo e vero, aumentiamo il contatore.
+      ` per verificare se quel carattere è presente tra le vocali.
+4. Ogni volta che il controllo è vero, aumentiamo il contatore.
 
 Alla fine il contatore contiene il numero totale di vocali trovate nella stringa.`,
     hints: [
       'Usa una variabile contatore che parte da 0 e aumenta quando trovi una vocale.',
-      'Per capire se una lettera e una vocale, puoi confrontarla con una stringa come `aeiou`.',
+      'Per capire se una lettera è una vocale, puoi confrontarla con una stringa come `aeiou`.',
     ],
     tests: [
       { args: ['ciao'], expected: 3, message: "'ciao' contiene 3 vocali" },
@@ -181,9 +181,9 @@ Alla fine il contatore contiene il numero totale di vocali trovate nella stringa
   {
     id: 'snack-05',
     level: 'snack',
-    title: 'Restituisci il nome piu lungo',
+    title: 'Restituisci il nome più lungo',
     prompt:
-      'Scrivi una funzione che riceve un array di nomi e restituisce il nome piu lungo.',
+      'Scrivi una funzione che riceve un array di nomi e restituisce il nome più lungo.',
     functionName: 'longestName',
     starterCode: `const longestName = names => {
 
@@ -199,7 +199,7 @@ Alla fine il contatore contiene il numero totale di vocali trovate nella stringa
   return longest;
 };`,
     explanation:
-      `Vogliamo trovare il nome con piu caratteri dentro un array.
+      `Vogliamo trovare il nome con più caratteri dentro un array.
 
 Passaggi:
 1. Prepariamo una variabile ` +
@@ -209,23 +209,23 @@ Passaggi:
 3. Per ogni nome confrontiamo la sua lunghezza con quella del nome salvato in ` +
       '`longest`' +
       `.
-4. Quando troviamo un nome piu lungo, aggiorniamo la variabile.
+4. Quando troviamo un nome più lungo, aggiorniamo la variabile.
 
-Alla fine restituiamo il nome piu lungo trovato durante il controllo. Se l'array e vuoto, il ciclo non parte e la funzione restituisce la stringa vuota iniziale.`,
+Alla fine restituiamo il nome più lungo trovato durante il controllo. Se l'array è vuoto, il ciclo non parte e la funzione restituisce la stringa vuota iniziale.`,
     hints: [
-      'Tieni in una variabile il nome piu lungo trovato finora e aggiornala quando ne trovi uno piu lungo.',
-      'Confronta i nomi usando la proprieta `.length`.',
+      'Tieni in una variabile il nome più lungo trovato finora e aggiornala quando ne trovi uno più lungo.',
+      'Confronta i nomi usando la proprietà `.length`.',
     ],
     tests: [
       {
         args: [['Anna', 'Giorgio', 'Silvia']],
         expected: 'Giorgio',
-        message: 'Giorgio e il nome piu lungo',
+        message: 'Giorgio è il nome più lungo',
       },
       {
         args: [['Marta']],
         expected: 'Marta',
-        message: 'Marta e il nome piu lungo',
+        message: 'Marta è il nome più lungo',
       },
       {
         args: [[]],
@@ -237,22 +237,22 @@ Alla fine restituiamo il nome piu lungo trovato durante il controllo. Se l'array
   {
     id: 'umano-01',
     level: 'umano',
-    title: 'Determina se un numero e pari',
+    title: 'Determina se un numero è pari',
     prompt:
-      'Scrivi una funzione che riceve un numero e restituisce true se il numero e pari, altrimenti false.',
+      'Scrivi una funzione che riceve un numero e restituisce true se il numero è pari, altrimenti false.',
     functionName: 'isEven',
     starterCode: `const isEven = num => {
 
 };`,
     solution: `const isEven = num => num % 2 === 0;`,
     explanation:
-      `Vogliamo capire se un numero e divisibile per 2 senza resto.
+      `Vogliamo capire se un numero è divisibile per 2 senza resto.
 
 Usiamo l'operatore modulo ` +
       '`%`' +
       `, che restituisce il resto della divisione. Se ` +
       '`num % 2`' +
-      ` vale 0, significa che il numero e pari; altrimenti e dispari.
+      ` vale 0, significa che il numero è pari; altrimenti è dispari.
 
 Alla fine la funzione restituisce un valore booleano: true per i numeri pari, false per quelli dispari.`,
     hints: [
@@ -268,9 +268,9 @@ Alla fine la funzione restituisce un valore booleano: true per i numeri pari, fa
   {
     id: 'umano-02',
     level: 'umano',
-    title: 'Determina se una stringa e vuota',
+    title: 'Determina se una stringa è vuota',
     prompt:
-      'Scrivi una funzione che riceve una stringa e restituisce true se e vuota, altrimenti false.',
+      'Scrivi una funzione che riceve una stringa e restituisce true se è vuota, altrimenti false.',
     functionName: 'isEmpty',
     starterCode: `const isEmpty = str => {
 
@@ -281,12 +281,12 @@ Alla fine la funzione restituisce un valore booleano: true per i numeri pari, fa
 
 In JavaScript una stringa vuota viene considerata un valore "falsy". Usando ` +
       '`!str`' +
-      ` invertiamo questo comportamento: se la stringa e vuota otteniamo true, se contiene testo otteniamo false.
+      ` invertiamo questo comportamento: se la stringa è vuota otteniamo true, se contiene testo otteniamo false.
 
-Alla fine la funzione risponde alla domanda: questa stringa e vuota?`,
+Alla fine la funzione risponde alla domanda: questa stringa è vuota?`,
     hints: [
       'Una stringa vuota non contiene caratteri, quindi puoi controllarla in modo diretto.',
-      'Puoi usare `.length` oppure sfruttare il fatto che `""` e un valore falsy.',
+      'Puoi usare `.length` oppure sfruttare il fatto che `""` è un valore falsy.',
     ],
     tests: [
       {
@@ -315,18 +315,18 @@ Alla fine la funzione risponde alla domanda: questa stringa e vuota?`,
     explanation:
       `Vogliamo sapere quanti caratteri contiene una stringa.
 
-Le stringhe hanno gia una proprieta ` +
+Le stringhe hanno già una proprietà ` +
       '`length`' +
       ` che contiene questa informazione. Non dobbiamo contarli manualmente: leggiamo quel valore e lo restituiamo.
 
 Alla fine otteniamo un numero, ad esempio 4 per la stringa "ciao".`,
     hints: [
-      'Non serve un ciclo: JavaScript conosce gia la lunghezza di una stringa.',
-      'La proprieta da leggere e `.length`.',
+      'Non serve un ciclo: JavaScript conosce già la lunghezza di una stringa.',
+      'La proprietà da leggere è `.length`.',
     ],
     tests: [
-      { args: ['ciao'], expected: 4, message: "lunghezza di 'ciao' e 4" },
-      { args: [''], expected: 0, message: 'lunghezza di stringa vuota e 0' },
+      { args: ['ciao'], expected: 4, message: "lunghezza di 'ciao' è 4" },
+      { args: [''], expected: 0, message: 'lunghezza di stringa vuota è 0' },
     ],
   },
   {
@@ -342,32 +342,32 @@ Alla fine otteniamo un numero, ad esempio 4 per la stringa "ciao".`,
     solution: `const double = num => num * 2;`,
     explanation: `Vogliamo calcolare il doppio del numero ricevuto.
 
-La soluzione traduce direttamente il problema in codice: moltiplichiamo il numero per 2. Non servono condizioni o cicli, perche il risultato dipende solo da una moltiplicazione.
+La soluzione traduce direttamente il problema in codice: moltiplichiamo il numero per 2. Non servono condizioni o cicli, perché il risultato dipende solo da una moltiplicazione.
 
 Alla fine la funzione restituisce il nuovo numero calcolato.`,
     hints: ['Il doppio di un numero si ottiene moltiplicandolo per 2.'],
     tests: [
-      { args: [5], expected: 10, message: 'doppio di 5 e 10' },
-      { args: [0], expected: 0, message: 'doppio di 0 e 0' },
+      { args: [5], expected: 10, message: 'doppio di 5 è 10' },
+      { args: [0], expected: 0, message: 'doppio di 0 è 0' },
     ],
   },
   {
     id: 'umano-05',
     level: 'umano',
-    title: 'Determina se un numero e positivo',
+    title: 'Determina se un numero è positivo',
     prompt:
-      'Scrivi una funzione che riceve un numero e restituisce true se e maggiore di zero.',
+      'Scrivi una funzione che riceve un numero e restituisce true se è maggiore di zero.',
     functionName: 'isPositive',
     starterCode: `const isPositive = num => {
 
 };`,
     solution: `const isPositive = num => num > 0;`,
     explanation:
-      `Vogliamo verificare se un numero e maggiore di zero.
+      `Vogliamo verificare se un numero è maggiore di zero.
 
 Usiamo il confronto ` +
       '`num > 0`' +
-      `. Se il confronto e vero, il numero e positivo. In questa soluzione 0 non viene considerato positivo, perche non e maggiore di 0.
+      `. Se il confronto è vero, il numero è positivo. In questa soluzione 0 non viene considerato positivo, perché non è maggiore di 0.
 
 Alla fine la funzione restituisce true solo per i numeri positivi.`,
     hints: [
@@ -375,9 +375,9 @@ Alla fine la funzione restituisce true solo per i numeri positivi.`,
       'La funzione deve restituire direttamente il risultato di una domanda vero/falso.',
     ],
     tests: [
-      { args: [5], expected: true, message: '5 e positivo' },
-      { args: [-3], expected: false, message: '-3 non e positivo' },
-      { args: [0], expected: false, message: '0 non e positivo' },
+      { args: [5], expected: true, message: '5 è positivo' },
+      { args: [-3], expected: false, message: '-3 non è positivo' },
+      { args: [0], expected: false, message: '0 non è positivo' },
     ],
   },
   {
@@ -396,7 +396,7 @@ Alla fine la funzione restituisce true solo per i numeri positivi.`,
 
 Quando usiamo l'operatore ` +
       '`+`' +
-      ` con le stringhe, JavaScript le concatena, cioe le attacca una dopo l'altra. In questa soluzione non aggiungiamo spazi automaticamente: il risultato dipende esattamente dalle due stringhe ricevute.
+      ` con le stringhe, JavaScript le concatena, cioè le attacca una dopo l'altra. In questa soluzione non aggiungiamo spazi automaticamente: il risultato dipende esattamente dalle due stringhe ricevute.
 
 Alla fine la funzione restituisce la stringa unita.`,
     hints: [
@@ -419,7 +419,7 @@ Alla fine la funzione restituisce la stringa unita.`,
   {
     id: 'umano-07',
     level: 'umano',
-    title: 'Determina se un array e vuoto',
+    title: 'Determina se un array è vuoto',
     prompt:
       'Scrivi una funzione che riceve un array e restituisce true se non contiene elementi.',
     functionName: 'isArrayEmpty',
@@ -430,13 +430,13 @@ Alla fine la funzione restituisce la stringa unita.`,
     explanation:
       `Vogliamo capire se un array non contiene elementi.
 
-Gli array hanno la proprieta ` +
+Gli array hanno la proprietà ` +
       '`length`' +
       `, che indica quanti elementi ci sono dentro. Se ` +
       '`arr.length`' +
-      ` vale 0, l'array e vuoto; se vale un numero maggiore di 0, contiene almeno un elemento.
+      ` vale 0, l'array è vuoto; se vale un numero maggiore di 0, contiene almeno un elemento.
 
-Alla fine la funzione restituisce true solo quando l'array e vuoto.`,
+Alla fine la funzione restituisce true solo quando l'array è vuoto.`,
     hints: [
       'Un array vuoto ha zero elementi.',
       'Controlla il valore di `arr.length`.',
@@ -474,16 +474,16 @@ Negli array gli indici partono da 0, quindi il primo elemento si trova in posizi
 
 Alla fine otteniamo il primo elemento dell'array ricevuto.`,
     hints: [
-      'Negli array il primo elemento non e in posizione 1.',
+      'Negli array il primo elemento non è in posizione 1.',
       'Gli indici partono da 0, quindi guarda `arr[0]`.',
     ],
     tests: [
       {
         args: [[1, 2, 3]],
         expected: 1,
-        message: 'primo elemento di [1,2,3] e 1',
+        message: 'primo elemento di [1,2,3] è 1',
       },
-      { args: [[5]], expected: 5, message: 'primo elemento di [5] e 5' },
+      { args: [[5]], expected: 5, message: 'primo elemento di [5] è 5' },
     ],
   },
   {
@@ -510,8 +510,8 @@ Alla fine la funzione restituisce il risultato della somma.`,
       "Con i numeri, l'operatore `+` esegue una somma matematica.",
     ],
     tests: [
-      { args: [3, 4], expected: 7, message: 'somma di 3 e 4 e 7' },
-      { args: [-2, 5], expected: 3, message: 'somma di -2 e 5 e 3' },
+      { args: [3, 4], expected: 7, message: 'somma di 3 e 4 è 7' },
+      { args: [-2, 5], expected: 3, message: 'somma di -2 e 5 è 3' },
     ],
   },
   {
@@ -532,28 +532,28 @@ Alla fine la funzione restituisce il risultato della somma.`,
       `Vogliamo ottenere la distanza del numero da zero, senza considerare il segno.
 
 Passaggi:
-1. Se il numero e negativo, lo trasformiamo nel suo opposto con ` +
+1. Se il numero è negativo, lo trasformiamo nel suo opposto con ` +
       '`-num`' +
       `.
-2. Se il numero e gia positivo o vale 0, lo lasciamo com'e.
+2. Se il numero è già positivo o vale 0, lo lasciamo com'è.
 
 Alla fine la funzione restituisce sempre un numero positivo o 0.`,
     hints: [
       'Dividi il ragionamento in due casi: numero negativo e numero non negativo.',
-      'Se il numero e negativo, il suo valore assoluto si ottiene cambiando il segno.',
+      'Se il numero è negativo, il suo valore assoluto si ottiene cambiando il segno.',
     ],
     tests: [
-      { args: [-5], expected: 5, message: 'assoluto di -5 e 5' },
-      { args: [3], expected: 3, message: 'assoluto di 3 e 3' },
-      { args: [0], expected: 0, message: 'assoluto di 0 e 0' },
+      { args: [-5], expected: 5, message: 'assoluto di -5 è 5' },
+      { args: [3], expected: 3, message: 'assoluto di 3 è 3' },
+      { args: [0], expected: 0, message: 'assoluto di 0 è 0' },
     ],
   },
   {
     id: 'esperto-01',
     level: 'esperto',
-    title: 'Determina se un numero e primo',
+    title: 'Determina se un numero è primo',
     prompt:
-      'Scrivi una funzione che riceve un numero e restituisce true se e primo.',
+      'Scrivi una funzione che riceve un numero e restituisce true se è primo.',
     functionName: 'isPrime',
     starterCode: `const isPrime = num => {
 
@@ -573,21 +573,21 @@ Alla fine la funzione restituisce sempre un numero positivo o 0.`,
 Passaggi:
 1. I numeri minori di 2 non sono primi, quindi restituiamo subito false.
 2. Proviamo a dividere il numero per possibili divisori partendo da 2.
-3. Se troviamo un divisore con resto 0, il numero non e primo.
+3. Se troviamo un divisore con resto 0, il numero non è primo.
 4. Usiamo ` +
       '`Math.sqrt(num)`' +
-      ` come limite per evitare controlli inutili: se esiste un divisore grande, ne esiste anche uno piu piccolo gia controllato.
+      ` come limite per evitare controlli inutili: se esiste un divisore grande, ne esiste anche uno più piccolo già controllato.
 
-Alla fine, se non troviamo divisori, il numero e primo.`,
+Alla fine, se non troviamo divisori, il numero è primo.`,
     hints: [
       'Prima gestisci i numeri minori di 2: non sono numeri primi.',
       'Poi prova a cercare un divisore: se `num % i` vale 0, hai trovato un motivo per restituire false.',
     ],
     tests: [
-      { args: [2], expected: true, message: '2 e primo' },
-      { args: [17], expected: true, message: '17 e primo' },
-      { args: [1], expected: false, message: '1 non e primo' },
-      { args: [4], expected: false, message: '4 non e primo' },
+      { args: [2], expected: true, message: '2 è primo' },
+      { args: [17], expected: true, message: '17 è primo' },
+      { args: [1], expected: false, message: '1 non è primo' },
+      { args: [4], expected: false, message: '4 non è primo' },
     ],
   },
   {
@@ -614,7 +614,7 @@ Alla fine, se non troviamo divisori, il numero e primo.`,
 
 Passaggi:
 1. Controlliamo gli elementi uno alla volta.
-2. Quando l'elemento corrente e uguale a quello cercato, restituiamo subito il suo indice.
+2. Quando l'elemento corrente è uguale a quello cercato, restituiamo subito il suo indice.
 3. Se arriviamo alla fine senza trovare nulla, restituiamo ` +
       '`-1`' +
       `.
@@ -622,18 +622,18 @@ Passaggi:
 Alla fine la funzione si comporta come una ricerca: restituisce la posizione se trova l'elemento, altrimenti -1.`,
     hints: [
       "Scorri l'array dall'inizio alla fine controllando un elemento alla volta.",
-      "Quando trovi l'elemento cercato, l'indice giusto e la variabile del ciclo.",
+      "Quando trovi l'elemento cercato, l'indice giusto è la variabile del ciclo.",
     ],
     tests: [
       {
         args: [[1, 2, 3], 2],
         expected: 1,
-        message: 'indice di 2 in [1,2,3] e 1',
+        message: 'indice di 2 in [1,2,3] è 1',
       },
       {
         args: [[5, 10, 15], 5],
         expected: 0,
-        message: 'indice di 5 in [5,10,15] e 0',
+        message: 'indice di 5 in [5,10,15] è 0',
       },
       {
         args: [[1, 2, 3], 99],
@@ -670,8 +670,8 @@ Passaggi:
 2. Controlliamo ogni numero con l'operatore modulo.
 3. Se ` +
       '`num % 2`' +
-      ` vale 0, il numero e pari.
-4. Quando il numero e pari, lo aggiungiamo al risultato con ` +
+      ` vale 0, il numero è pari.
+4. Quando il numero è pari, lo aggiungiamo al risultato con ` +
       '`.push()`' +
       `.
 
@@ -696,9 +696,9 @@ Alla fine restituiamo il nuovo array filtrato.`,
   {
     id: 'esperto-04',
     level: 'esperto',
-    title: 'Determina se una stringa e un palindromo',
+    title: 'Determina se una stringa è un palindromo',
     prompt:
-      'Scrivi una funzione che riceve una stringa e restituisce true se puo essere letta allo stesso modo da sinistra a destra e da destra a sinistra.',
+      'Scrivi una funzione che riceve una stringa e restituisce true se può essere letta allo stesso modo da sinistra a destra e da destra a sinistra.',
     functionName: 'isPalindrome',
     starterCode: `const isPalindrome = str => {
 
@@ -714,19 +714,19 @@ Alla fine restituiamo il nuovo array filtrato.`,
 
 Passaggi:
 1. Confrontiamo il primo carattere con l'ultimo.
-2. Poi confrontiamo il secondo con il penultimo, e cosi via.
-3. Se troviamo due caratteri diversi, possiamo dire subito che non e un palindromo.
-4. Non serve controllare tutta la stringa: basta arrivare fino a meta.
+2. Poi confrontiamo il secondo con il penultimo, e così via.
+3. Se troviamo due caratteri diversi, possiamo dire subito che non è un palindromo.
+4. Non serve controllare tutta la stringa: basta arrivare fino a metà.
 
-Alla fine, se nessun confronto fallisce, la stringa e palindroma.`,
+Alla fine, se nessun confronto fallisce, la stringa è palindroma.`,
     hints: [
-      'Confronta le lettere a coppie: prima con ultima, seconda con penultima, e cosi via.',
+      'Confronta le lettere a coppie: prima con ultima, seconda con penultima, e così via.',
       'Per leggere la lettera opposta a `str[i]`, ragiona su `str.length - 1 - i`.',
     ],
     tests: [
-      { args: ['aba'], expected: true, message: "'aba' e un palindromo" },
-      { args: ['abc'], expected: false, message: "'abc' non e un palindromo" },
-      { args: ['a'], expected: true, message: "'a' e un palindromo" },
+      { args: ['aba'], expected: true, message: "'aba' è un palindromo" },
+      { args: ['abc'], expected: false, message: "'abc' non è un palindromo" },
+      { args: ['a'], expected: true, message: "'a' è un palindromo" },
     ],
   },
   {
@@ -752,7 +752,7 @@ Alla fine, se nessun confronto fallisce, la stringa e palindroma.`,
     explanation: `Vogliamo sommare tutti i numeri presenti in un array.
 
 Passaggi:
-1. Prepariamo una variabile che parte da 0, perche all'inizio non abbiamo ancora sommato nulla.
+1. Prepariamo una variabile che parte da 0, perché all'inizio non abbiamo ancora sommato nulla.
 2. Aggiungiamo ogni numero dell'array al totale.
 3. La variabile cresce passo dopo passo fino a contenere la somma completa.
 
@@ -762,9 +762,9 @@ Alla fine restituiamo il totale calcolato.`,
       "Durante il ciclo aggiungi ogni numero dell'array al totale.",
     ],
     tests: [
-      { args: [[1, 2, 3]], expected: 6, message: 'somma di [1,2,3] e 6' },
-      { args: [[10, 20]], expected: 30, message: 'somma di [10,20] e 30' },
-      { args: [[]], expected: 0, message: 'somma di array vuoto e 0' },
+      { args: [[1, 2, 3]], expected: 6, message: 'somma di [1,2,3] è 6' },
+      { args: [[10, 20]], expected: 30, message: 'somma di [10,20] è 30' },
+      { args: [[]], expected: 0, message: 'somma di array vuoto è 0' },
     ],
   },
   {
@@ -864,7 +864,7 @@ Alla fine restituiamo l'array con tutti i numeri raddoppiati. Questa soluzione m
     level: 'esperto',
     title: 'Ordina un array di numeri',
     prompt:
-      'Scrivi una funzione che riceve un array di numeri e lo restituisce ordinato dal piu piccolo al piu grande.',
+      'Scrivi una funzione che riceve un array di numeri e lo restituisce ordinato dal più piccolo al più grande.',
     functionName: 'sort',
     starterCode: `const sort = arr => {
 
@@ -885,18 +885,18 @@ Alla fine restituiamo l'array con tutti i numeri raddoppiati. Questa soluzione m
 
   return arr;
 };`,
-    explanation: `Vogliamo ordinare i numeri dal piu piccolo al piu grande usando una versione semplice del bubble sort.
+    explanation: `Vogliamo ordinare i numeri dal più piccolo al più grande usando una versione semplice del bubble sort.
 
 Passaggi:
 1. Confrontiamo coppie di elementi vicini.
-2. Se il primo elemento e piu grande del secondo, li scambiamo.
-3. Ripetiamo questi confronti piu volte, cosi i numeri piu grandi si spostano verso la fine dell'array.
+2. Se il primo elemento è più grande del secondo, li scambiamo.
+3. Ripetiamo questi confronti più volte, così i numeri più grandi si spostano verso la fine dell'array.
 4. Lo scambio usa una variabile temporanea, per non perdere uno dei due valori.
 
 Alla fine l'array risulta ordinato in modo crescente.`,
     hints: [
       "Confronta coppie di numeri vicini: se sono nell'ordine sbagliato, scambiali.",
-      'Ripeti i confronti piu volte, perche un solo passaggio non basta sempre a ordinare tutto.',
+      'Ripeti i confronti più volte, perché un solo passaggio non basta sempre a ordinare tutto.',
     ],
     tests: [
       {
@@ -915,9 +915,9 @@ Alla fine l'array risulta ordinato in modo crescente.`,
   {
     id: 'esperto-09',
     level: 'esperto',
-    title: 'Restituisci il numero piu grande di un array',
+    title: 'Restituisci il numero più grande di un array',
     prompt:
-      'Scrivi una funzione che riceve un array di numeri e restituisce il numero piu grande.',
+      'Scrivi una funzione che riceve un array di numeri e restituisce il numero più grande.',
     functionName: 'max',
     starterCode: `const max = arr => {
 
@@ -935,22 +935,22 @@ Alla fine l'array risulta ordinato in modo crescente.`,
 
   return max;
 };`,
-    explanation: `Vogliamo trovare il numero piu grande dentro un array.
+    explanation: `Vogliamo trovare il numero più grande dentro un array.
 
 Passaggi:
-1. Se l'array e vuoto, restituiamo -1 come valore speciale.
+1. Se l'array è vuoto, restituiamo -1 come valore speciale.
 2. Usiamo il primo elemento come massimo iniziale.
 3. Confrontiamo gli altri numeri con il massimo salvato.
-4. Quando troviamo un numero piu grande, aggiorniamo la variabile.
+4. Quando troviamo un numero più grande, aggiorniamo la variabile.
 
-Alla fine restituiamo il valore piu grande trovato.`,
+Alla fine restituiamo il valore più grande trovato.`,
     hints: [
-      'Tieni in una variabile il numero piu grande trovato finora.',
-      'Confronta ogni numero con quel valore e aggiornalo solo quando trovi un numero piu grande.',
+      'Tieni in una variabile il numero più grande trovato finora.',
+      'Confronta ogni numero con quel valore e aggiornalo solo quando trovi un numero più grande.',
     ],
     tests: [
-      { args: [[1, 5, 3]], expected: 5, message: 'massimo di [1,5,3] e 5' },
-      { args: [[10]], expected: 10, message: 'massimo di [10] e 10' },
+      { args: [[1, 5, 3]], expected: 5, message: 'massimo di [1,5,3] è 5' },
+      { args: [[10]], expected: 10, message: 'massimo di [10] è 10' },
     ],
   },
   {
@@ -958,7 +958,7 @@ Alla fine restituiamo il valore piu grande trovato.`,
     level: 'esperto',
     title: 'Determina se un array contiene un numero specifico',
     prompt:
-      'Scrivi una funzione che riceve un array e un numero, poi restituisce true se il numero e presente.',
+      'Scrivi una funzione che riceve un array e un numero, poi restituisce true se il numero è presente.',
     functionName: 'includes',
     starterCode: `const includes = (arr, num) => {
 
@@ -970,7 +970,7 @@ Alla fine restituiamo il valore piu grande trovato.`,
 
   return false;
 };`,
-    explanation: `Vogliamo sapere se un numero specifico e presente dentro un array.
+    explanation: `Vogliamo sapere se un numero specifico è presente dentro un array.
 
 Passaggi:
 1. Controlliamo gli elementi dell'array uno alla volta.
