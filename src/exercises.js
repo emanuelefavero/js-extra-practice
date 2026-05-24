@@ -189,26 +189,29 @@ Alla fine il contatore contiene il numero totale di vocali trovate nella stringa
 
 };`,
     solution: `const longestName = names => {
-  if (names.length === 0) return '';
+  let longest = '';
 
-  let longest = names[0];
-
-  for (let i = 1; i < names.length; i++) {
+  for (let i = 0; i < names.length; i++) {
     const name = names[i];
     if (name.length > longest.length) longest = name;
   }
 
   return longest;
 };`,
-    explanation: `Vogliamo trovare il nome con piu caratteri dentro un array.
+    explanation:
+      `Vogliamo trovare il nome con piu caratteri dentro un array.
 
 Passaggi:
-1. Se l'array e vuoto, restituiamo subito una stringa vuota.
-2. Usiamo il primo nome come valore piu lungo trovato finora.
-3. Confrontiamo la lunghezza degli altri nomi con quella del nome salvato.
+1. Prepariamo una variabile ` +
+      '`longest`' +
+      ` che parte da stringa vuota.
+2. Controlliamo tutti i nomi dell'array, partendo dall'indice 0.
+3. Per ogni nome confrontiamo la sua lunghezza con quella del nome salvato in ` +
+      '`longest`' +
+      `.
 4. Quando troviamo un nome piu lungo, aggiorniamo la variabile.
 
-Alla fine restituiamo il nome piu lungo trovato durante il controllo.`,
+Alla fine restituiamo il nome piu lungo trovato durante il controllo. Se l'array e vuoto, il ciclo non parte e la funzione restituisce la stringa vuota iniziale.`,
     hints: [
       'Tieni in una variabile il nome piu lungo trovato finora e aggiornala quando ne trovi uno piu lungo.',
       'Confronta i nomi usando la proprieta `.length`.',
